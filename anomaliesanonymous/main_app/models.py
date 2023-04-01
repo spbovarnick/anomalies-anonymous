@@ -95,3 +95,8 @@ class Sighting(models.Model):
     latitude = models.DecimalField(max_digits=8, decimal_places=6)
     longitude = models.DecimalField(max_digits=8, decimal_places=6)
     description = models.TextField(max_length=300)
+
+class Comment(models.Model):
+    sighting = models.ForeignKey('Sighting')
+    date_posted = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(max_length=300)
