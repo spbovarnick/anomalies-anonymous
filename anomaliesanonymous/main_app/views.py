@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.base import View
 
 sightings = [
     {'datetime': '10/10/1965 23:45:00', 'city':'norwalk', 'state': 'ct', 'country': 'us', 'shape': 'disk', 'duration': 1200, 'comment': 'A bright orange color changing to reddish color disk/saucer was observed hovering above power transmission lines.', 'latitude': 41.1175, 'longitude': -73.4083333},
