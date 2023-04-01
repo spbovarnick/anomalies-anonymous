@@ -13,7 +13,6 @@
 </head>
 <body>
   <header>
-
     <nav class="navbar fixed-top navbar-expand-md navbar-dark">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/about/">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Sightings</a>
+              <a class="nav-link" href="/sightings">Sightings</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">Map</a>
@@ -53,15 +52,13 @@
       </div>
     </nav>
   </header>
-  <main class="container">
+    <main>
     {% block content %}
 
     {% endblock %}
-  </main>
-
+    </main>
   <footer class="fixed-bottom text-center">
       <p>All Rights Reserved, &copy; 2023 Anomalies Anonymous&nbsp;</p>
   </footer>
-
 </body>
 </html> 
