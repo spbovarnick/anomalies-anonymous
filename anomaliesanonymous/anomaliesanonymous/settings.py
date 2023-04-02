@@ -16,7 +16,7 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-FIXTURE_DIRS = BASE_DIR / "fixtures"
+# FIXTURE_DIRS = BASE_DIR / "fixtures"
 
 
 # Quick-start development settings - unsuitable for production
