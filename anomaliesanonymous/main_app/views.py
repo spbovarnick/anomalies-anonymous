@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Sighting, Comment
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # Create your views here.
@@ -29,3 +29,7 @@ class SightingCreate(CreateView):
 class SightingUpdate(UpdateView):
     model = Sighting
     fields = ['datetime', 'city', 'state', 'shape', 'duration', 'description']
+
+class SightingDelete(DeleteView):
+    model = Sighting
+    success_url = '/sightings'

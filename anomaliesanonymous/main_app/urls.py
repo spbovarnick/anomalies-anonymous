@@ -7,4 +7,5 @@ urlpatterns = [
     path('sightings/<int:sighting_id>/', views.sightings_detail, name='detail'),
     path('sightings/create/', views.SightingCreate.as_view(), name='sightings_create'),
     path('sightings/<int:pk>/update', views.SightingUpdate.as_view(), name='sightings_update'),
+    path('sightings/<int:pk>/delete', views.SightingDelete.as_view(), name='sightings_delete'),
 ]

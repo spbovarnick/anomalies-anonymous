@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Delete Sighting</h1>
+
+<h4>Are you sure you want to delete sighting #{{ object.id }}</h4>
+<p>On <b>{{ object.datetime }}</b> you reported seeing a <b>{{ object.get_shape_display.capitalize }}</b> for <b>{{ object.duration }}</b> in <b>{{ object.city }}, {{ object.get_state_display }}.</b></p>
+
+<p>You described the sighting as follows: <br> {{ sighting.description }}</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes, delete" class="btn">
+    <a href="{% url 'detail' sighting.id %}" class="btn">Cancel</a>
+</form>
+
+{% endblock %}
