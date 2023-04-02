@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1 class="mb-5">Sighting Details</h1>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Report #</h5>
+            <p class="card-text">When: {{ sighting.datetime }}</p>
+            <p class="card-text">Latitude: {{ sighting.latitude }}</p>
+            <p class="card-text">Longitude: {{ sighting.longitude }}</p>
+            <p class="card-text">City: {{ sighting.city }}</p>
+            <p class="card-text">State: {{ sighting.state }}</p>
+            <p class="card-text">Duration: {{ sighting.duration }} seconds</p>
+            <p class="card-text">Shape: {{ sighting.shape }}</p>
+            <p class="card-text">Description: {{ sighting.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
