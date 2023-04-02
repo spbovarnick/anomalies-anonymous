@@ -10,7 +10,7 @@ def about(request):
     return render(request, 'about.html')
 
 def sightings_index(request):
-    sightings = Sighting.objects.filter(id__lt=100).order_by('datetime')
+    sightings = Sighting.objects.filter(id__lt=100).order_by('-datetime')
     return render(request, 'sightings/index.html', {
         'sightings': sightings 
     })
