@@ -92,11 +92,11 @@ class Sighting(models.Model):
     shape = models.CharField(max_length=3, choices=SHAPE_CHOICES, default=SHAPE_CHOICES[0][0])
     duration = models.DurationField()
     date_posted = models.DateTimeField(auto_now_add=True)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6)
-    longitude = models.DecimalField(max_digits=8, decimal_places=6)
+    latitude = models.DecimalField(max_digits=11, decimal_places=8)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8)
     description = models.TextField(max_length=300)
 
 class Comment(models.Model):
-    sighting = models.ForeignKey('Sighting')
+    sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(max_length=300)
