@@ -21,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/sightings">Sightings</a>
+              <a class="nav-link" href="{% url 'index' %}">Sightings</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">Map</a>
@@ -36,7 +36,7 @@
           
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link navbar-brand" href="/">Anomalies Anonymous</a>
+              <a class="nav-link navbar-brand" href="{% url 'home' %}">Anomalies Anonymous</a>
             </li>
           </ul>
 
