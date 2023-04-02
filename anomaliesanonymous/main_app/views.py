@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Sighting, Comment
+from django.views.generic.edit import CreateView
 
 
 # Create your views here.
@@ -20,3 +21,7 @@ def sightings_detail(request, sighting_id):
     return render(request, 'sightings/detail.html', {
         'sighting': sighting
     })
+
+class SightingCreate(CreateView):
+    model = Sighting
+    fields = ['datetime', 'city', 'state', 'shape', 'duration', 'description']
