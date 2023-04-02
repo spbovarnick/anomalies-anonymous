@@ -100,3 +100,6 @@ class Comment(models.Model):
     sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(max_length=300)
+
+    class Meta:
+        ordering = ['-date_posted']

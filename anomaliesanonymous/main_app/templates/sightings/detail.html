@@ -9,13 +9,6 @@
       <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
         <div class="card">
           <div class="card-body">
-            <p class="card-text">Placeholder for image</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-        <div class="card">
-          <div class="card-body">
             <h5 class="card-title mb-3">Report #{{ sighting.id }}</h5>
             <p class="card-text">When:</p>
             <p class="card-text">{{ sighting.datetime }}</p>
@@ -29,22 +22,35 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <h3 class="card-title mb-3">Comments</h3>
-      <!-- <div class="card">
-        <div class="card-body">
-        <p class="card-text">Fart</p>
-        </div>
-      </div> -->
-        {% for comment in sighting.comment_set.all %}
-          <div class="card">
-            <div class="card-body">
-              <p class="card-text">{{ comment.date_posted }}</p>
-              <p class="card-text">{{ comment.comment }}</p>
-            </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">Placeholder for image</p>
           </div>
-        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-4">
+      <h2 class="card-title mb-3">Comments</h2>
+      <div class="form-group">
+        <form action="{% url 'add_comment' sighting.id %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            {{ comment_form }}
+          </div>
+          <button type="submit" class="btn btn-primary mb-3">Add Comment</button>
+        </form>
+      </div>
+
+      {% for comment in sighting.comment_set.all %}
+        <div class="card mb-2">
+          <div class="card-body">
+            <p class="card-text">Posted: {{ comment.date_posted }}</p>
+            <p class="card-text">Comment: {{ comment.comment }}</p>
+          </div>
+        </div>
+      {% endfor %}
+
     </div>
 </div>
 
