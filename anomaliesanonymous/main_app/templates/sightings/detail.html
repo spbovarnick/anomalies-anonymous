@@ -24,7 +24,7 @@
             <p class="card-text">{{ sighting.city }}, {{ sighting.state }}</p>
             <p class="card-text">Latitude: {{ sighting.latitude }} | Longitude: {{ sighting.longitude }}</p>
             <p class="card-text">What:</p>
-            <p class="card-text">Shape: {{ sighting.shape }}</p>
+            <p class="card-text">Shape: {{ sighting.get_shape_display.capitalize }}</p>
             <p class="card-text">Description: {{ sighting.description }}</p>
           </div>
         </div>
