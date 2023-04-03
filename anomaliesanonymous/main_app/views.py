@@ -70,8 +70,6 @@ class CommentEdit(UpdateView):
 class CommentDelete(DeleteView):
   model = Comment
   success_url = f"/detail/{Sighting.objects}"
-        'sighting': sighting
-    })
 
 def fetch_sightings(request):
     page_number = request.GET.get('page', 1)
