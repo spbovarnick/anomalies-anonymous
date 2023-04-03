@@ -58,7 +58,6 @@ class CommentEdit(UpdateView):
   model = Comment
   fields = ['comment']
 
-
 def delete_comment(request, sighting_id, comment_id):
     form = DeleteCommentForm(request.POST)
     sighting = get_object_or_404(Sighting, id=sighting_id)
