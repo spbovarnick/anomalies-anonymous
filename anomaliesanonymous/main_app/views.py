@@ -30,7 +30,6 @@ def sightings_index(request):
         'sightings': sightings
     })
 
-
 def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
     return render(request, 'sightings/detail.html', {

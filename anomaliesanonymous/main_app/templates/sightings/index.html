@@ -24,57 +24,58 @@
     </div>
   </div>
 
-{% endblock %}
+  <script defer>
+    let page = 1;
+    let isLoading = false;
 
-{% block extra_js %}
-<script>
-  let page = 1;
-  let isLoading = false;
+    const loadMoreData = async () => {
+      isLoading = true;
+      page++;
 
-  const loadMoreData = async () => {
-    isLoading = true;
-    page++;
+      console.log('Loading more data...'); // Added console log
 
-    try {
-      const response = await fetch(`/fetch_sightings/?page=${page}`);
-      const data = await response.json();
+      try {
+        const response = await fetch(`/fetch_sightings/?page=${page}`);
+        const data = await response.json();
 
-      if (data.has_next) {
-        const sightings = JSON.parse(data.data);
-        const row = document.getElementById('sightings-row');
+        if (data.has_next) {
+          const sightings = JSON.parse(data.data);
+          const row = document.getElementById('sightings-row');
 
-        sightings.forEach(sighting => {
-          const col = document.createElement('div');
-          col.className = 'col-md-6 col-lg-4 mb-4';
+          sightings.forEach(sighting => {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4 mb-4';
 
-          col.innerHTML = `
-            <div class="card h-100">
-              <div class="card-body">
-                <h5 class="card-title mb-3">Report #${sighting.pk}</h5>
-                <p class="card-text">City: ${sighting.fields.city}</p>
-                <p class="card-text">State: ${sighting.fields.state}</p>
-                <p class="card-text">When: ${new Date(sighting.fields.datetime).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })}</p>
-                <div class="text-center">
-                  <a href="/sightings/${sighting.pk}" class="btn">Details</a>
+            col.innerHTML = `
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title mb-3">Report #${sighting.pk}</h5>
+                  <p class="card-text">City: ${sighting.fields.city}</p>
+                  <p class="card-text">State: ${sighting.fields.state}</p>
+                  <p class="card-text">When: ${new Date(sighting.fields.datetime).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })}</p>
+                  <div class="text-center">
+                    <a href="/sightings/${sighting.pk}" class="btn">Details</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          `;
+            `;
 
-          row.appendChild(col);
-        });
+            row.appendChild(col);
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching more sightings:", error);
       }
-    } catch (error) {
-      console.error("Error fetching more sightings:", error);
-    }
 
-    isLoading = false;
-  };
+      isLoading = false;
+    };
 
-  window.onscroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoading) {
-      loadMoreData();
-    }
-  };
-</script>
+    window.onscroll = () => {
+      console.log('Scroll event fired...'); // Added console log
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoading) {
+        loadMoreData();
+      }
+    };
+  </script>
+
 {% endblock %}
