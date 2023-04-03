@@ -97,7 +97,6 @@ class Sighting(models.Model):
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     description = models.TextField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE) # cascade method deletes all sightings if user is deleted
-    comments = models.ForeignKey('Comment', on_delete=models.CASCADE, null=True) # cascade method deletes all comments if sighting is deleted
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'sighting_id': self.id})
