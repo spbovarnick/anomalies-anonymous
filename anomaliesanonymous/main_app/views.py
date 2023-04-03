@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 from .models import Sighting, Comment
 from .forms import SightingForm
 
