@@ -1,3 +1,4 @@
+
 # flatpickr: https://github.com/monim67/django-flatpickr
 # durationwidget: https://github.com/devangpadhiyar/django-durationwidget
 
@@ -6,8 +7,13 @@ from durationwidget.widgets import TimeDurationWidget
 from django.forms import ModelForm
 from django.forms.widgets import TextInput
 
-from .models import Sighting
+from .models import Sighting, Comment
 from django import forms
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']
 
 # make sure to run pip3 install django-flatpickr !!!
 class SightingForm(ModelForm):

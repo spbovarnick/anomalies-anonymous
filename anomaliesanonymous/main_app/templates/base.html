@@ -1,4 +1,5 @@
 {% load static %}
+{% load bootstrap5 %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +28,10 @@
               <a class="nav-link" href="{% url 'index' %}">Sightings</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Map</a>
+              <a class="nav-link" href="#">Map</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">News</a>
+              <a class="nav-link" href="#">News</a>
             </li>
           </ul>
           
@@ -42,7 +43,7 @@
 
           <ul class="navbar-nav me mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="">Sign In</a>
+              <a class="nav-link" href="#">Sign In</a>
             </li>
             <li class="nav-item">
               <a class="nav-link button" href="{% url 'sightings_create' %}">Report A Sighting</a>

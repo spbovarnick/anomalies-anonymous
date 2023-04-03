@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'durationwidget',
     'django_flatpickr',
     'main_app',
+    'bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

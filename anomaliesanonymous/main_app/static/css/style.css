@@ -70,6 +70,20 @@ a.nav-link.button:hover {
     opacity: 1;
 }
 
+#report-number {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+p.card-text.bold {
+    color: rgb(69, 69, 125);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.15rem;
+}
+
+em
+
 footer {
     color: rgb(169, 169, 169);
     font-size: 12px;

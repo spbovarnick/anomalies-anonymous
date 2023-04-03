@@ -1,20 +1,28 @@
+
+# Python modules
+
+# Django modules
 from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
+
+# App modules
 from .models import Sighting, Comment
-from .forms import SightingForm
+from .forms import SightingForm, CommentForm
+
 
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
+
 def about(request):
     return render(request, 'about.html')
+
 
 # def sightings_index(request):
 #     sightings = Sighting.objects.filter(id__lt=100).order_by('datetime')
@@ -34,9 +42,34 @@ def sightings_index(request):
         'sightings': sightings
     })
 
+
 def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
+    comment_form = CommentForm()
     return render(request, 'sightings/detail.html', {
+
+        'sighting': sighting,
+        'comment_form': comment_form,
+    })
+
+
+def add_comment(request, sighting_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.sighting_id = sighting_id
+        new_comment.save()
+    return redirect('detail', sighting_id=sighting_id)
+
+
+class CommentEdit(UpdateView):
+  model = Comment
+  fields = ['comment']
+
+
+class CommentDelete(DeleteView):
+  model = Comment
+  success_url = f"/detail/{Sighting.objects}"
         'sighting': sighting
     })
 
