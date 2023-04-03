@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -95,14 +96,17 @@ class Sighting(models.Model):
     latitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     description = models.TextField(max_length=300)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) # cascade method deletes all sightings if user is deleted
+    comments = models.ForeignKey('Comment', on_delete=models.CASCADE, null=True) # cascade method deletes all comments if sighting is deleted
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'sighting_id': self.id})
 
 class Comment(models.Model):
-    sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE)
+    sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE) # cascade method deletes all comments if sighting is deleted
     date_posted = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(max_length=300)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) # cascade method deletes all comments if user is deleted
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'sighting_id': self.sighting.id})
