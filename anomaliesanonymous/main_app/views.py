@@ -42,7 +42,7 @@ def sightings_detail(request, sighting_id):
 
 def fetch_sightings(request):
     page_number = request.GET.get('page', 1)
-    per_page = 9  # Change this to the number of cards you want to load per request
+    per_page = 100  # Change this to the number of cards you want to load per request
 
     all_sightings = Sighting.objects.all().order_by('-datetime')
     paginator = Paginator(all_sightings, per_page)
