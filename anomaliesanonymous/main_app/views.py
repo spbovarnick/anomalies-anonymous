@@ -47,6 +47,6 @@ class CommentEdit(UpdateView):
   fields = ['comment']
 
 
-# class CommentDelete(DeleteView):
-#   model = Comment
-#   success_url = '/sightings'
+class CommentDelete(DeleteView):
+  model = Comment
+  success_url = f"/detail/{Sighting.objects}"

@@ -49,9 +49,8 @@
               <p class="card-text">Posted: {{ comment.date_posted }}</p>
               <p class="card-text">Comment: {{ comment.comment }}</p>
               <a href="{% url 'edit_comment' sighting.id comment.id %}" class="btn">Edit</a>
+              <a href="{% url 'delete_comment' sighting.id comment.id %}" class="btn">Delete</a>
             </div>
-            
-            <!-- Delete Button -->
           </div>
         {% endfor %}
       {% else %}
