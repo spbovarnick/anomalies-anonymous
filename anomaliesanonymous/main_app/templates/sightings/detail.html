@@ -35,7 +35,7 @@
 
 
       <form action="{% url 'add_comment' sighting.id %}" method="POST">
-        {% csrf_token %}
+          {% csrf_token %}
         <div class="form-group">
           {{ comment_form }}
         </div>
