@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -92,9 +93,12 @@ class Sighting(models.Model):
     shape = models.CharField(max_length=3, choices=SHAPE_CHOICES, default=SHAPE_CHOICES[0][0])
     duration = models.DurationField()
     date_posted = models.DateTimeField(auto_now_add=True)
-    latitude = models.DecimalField(max_digits=11, decimal_places=8)
-    longitude = models.DecimalField(max_digits=11, decimal_places=8)
+    latitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
+    longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     description = models.TextField(max_length=300)
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'sighting_id': self.id})
 
 class Comment(models.Model):
     sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE)
