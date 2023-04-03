@@ -2,9 +2,8 @@
 
 
 {% block content %}
-<h1 class="mb-5">Recent Sightings</h1>
-
 <div class="container">
+  <h1 class="mb-5">Recent Sightings</h1>
     <div class="row">
       {% for sighting in sightings %}
       <div class="col-md-6 col-lg-4 mb-4">
@@ -23,5 +22,4 @@
       {% endfor %}
     </div>
   </div>
-
 {% endblock %}

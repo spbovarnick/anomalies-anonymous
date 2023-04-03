@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 # Create your models here.
 class Sighting(models.Model):
@@ -100,6 +100,9 @@ class Comment(models.Model):
     sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(max_length=300)
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'sighting_id': self.sighting.id})
 
     class Meta:
         ordering = ['-date_posted']
