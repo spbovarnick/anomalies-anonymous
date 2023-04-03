@@ -11,7 +11,7 @@ from django.contrib import messages
 
 # App modules
 from .models import Sighting, Comment
-from .forms import SightingForm, CommentForm
+from .forms import SightingForm, CommentForm, DeleteCommentForm
 
 
 
@@ -24,16 +24,9 @@ def about(request):
     return render(request, 'about.html')
 
 
-# def sightings_index(request):
-#     sightings = Sighting.objects.filter(id__lt=100).order_by('datetime')
-#     return render(request, 'sightings/index.html', {
-#         'sightings': sightings
-#     })
-
 def sightings_index(request):
     page_number = request.GET.get('page', 1)
     per_page = 36  # Change this to the number of cards you want to load per request
-
     sightings = Sighting.objects.all().order_by('-datetime')
     paginator = Paginator(sightings, per_page)
     sightings = paginator.get_page(page_number)
@@ -47,7 +40,6 @@ def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
     comment_form = CommentForm()
     return render(request, 'sightings/detail.html', {
-
         'sighting': sighting,
         'comment_form': comment_form,
     })
@@ -67,9 +59,15 @@ class CommentEdit(UpdateView):
   fields = ['comment']
 
 
-class CommentDelete(DeleteView):
-  model = Comment
-  success_url = f"/detail/{Sighting.objects}"
+def delete_comment(request, sighting_id, comment_id):
+    form = DeleteCommentForm(request.POST)
+    sighting = get_object_or_404(Sighting, id=sighting_id)
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == "POST":
+        comment.delete()
+        return redirect('detail', sighting_id=sighting_id)
+    return render(request, 'comment/comment_delete.html', {
+        'form': form,
         'sighting': sighting
     })
 
@@ -106,10 +104,6 @@ def sightings_update(request, sighting_id):
     })
     context["form"] = form
     return render(request, 'sightings/sightings_create.html', context)
-
-# class SightingCreate(CreateView):
-#     model = Sighting
-#     fields = ['datetime', 'city', 'state', 'shape', 'duration', 'description']
 
 class SightingUpdate(UpdateView):
     model = Sighting

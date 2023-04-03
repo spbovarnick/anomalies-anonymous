@@ -15,6 +15,11 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ['comment']
 
+class DeleteCommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = []
+
 # make sure to run pip3 install django-flatpickr !!!
 class SightingForm(ModelForm):
     class Meta:

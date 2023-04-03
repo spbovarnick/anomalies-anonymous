@@ -10,8 +10,7 @@
     <form action="" method="POST">
         {% csrf_token %}
         <input type="submit" class="btn mb-4" value="Confirm">
-        <a class="btn" href="{% url 'detail' comment.sighting_id %}">Cancel</a>
+        <a class="btn" href="{% url 'detail' sighting.id %}">Cancel</a>
     </form>
-
 </div>
 {% endblock %}
