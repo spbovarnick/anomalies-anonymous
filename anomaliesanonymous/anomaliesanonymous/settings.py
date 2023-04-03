@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'durationwidget',
+    'django_flatpickr',
     'main_app',
     'bootstrap5',
     'django.contrib.admin',

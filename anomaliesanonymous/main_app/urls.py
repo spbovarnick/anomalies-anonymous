@@ -8,4 +8,8 @@ urlpatterns = [
     path('sightings/<int:sighting_id>/add_comment/', views.add_comment, name='add_comment'),
     path('sightings/<int:fk>/edit_comment/<int:pk>/', views.CommentEdit.as_view(), name='edit_comment'),
     path('sightings/<int:fk>/delete_comment/<int:pk>/', views.CommentDelete.as_view(), name='delete_comment'),
+    path('fetch_sightings/', views.fetch_sightings, name='fetch_sightings'),
+    path('sightings/create/', views.sightings_create, name='sightings_create'),
+    path('sightings/<int:sighting_id>/update', views.sightings_update, name='sightings_update'),
+    path('sightings/<int:pk>/delete', views.SightingDelete.as_view(), name='sightings_delete'),
 ]
