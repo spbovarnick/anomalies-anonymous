@@ -13,4 +13,5 @@ urlpatterns = [
     path('sightings/<int:sighting_id>/update/', views.sightings_update, name='sightings_update'),
     path('sightings/<int:pk>/delete/', views.SightingDelete.as_view(), name='sightings_delete'),
     path('sightings/<int:sighting_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
