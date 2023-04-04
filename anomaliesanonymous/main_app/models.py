@@ -105,14 +105,13 @@ class Comment(models.Model):
     sighting = models.ForeignKey('Sighting', on_delete=models.CASCADE) # cascade method deletes all comments if sighting is deleted
     date_posted = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(max_length=300)
-    user = models.ForeignKey(User, on_delete=models.CASCADE) # cascade method deletes all comments if user is deleted
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE) # cascade method deletes all comments if user is deleted
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'sighting_id': self.sighting.id})
 
     class Meta:
         ordering = ['-date_posted']
-
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
