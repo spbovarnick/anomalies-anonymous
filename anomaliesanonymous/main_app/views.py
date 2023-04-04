@@ -61,27 +61,19 @@ def fetch_sightings(request):
     data = serializers.serialize('json', sightings) # Convert the data to JSON
     return JsonResponse({'data': data, 'has_next': sightings.has_next()})
 
-class SightingFormView(LoginRequiredMixin, FormView):
-    template_name = 'sightings_create.html'
-    form_class = SightingForm
-    success_url = '/sightings'
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-# def sightings_create(request):
-#     context = {}
-#     form = SightingForm(request.POST)
-#     if form.is_valid():
-#         sighting = form.save(commit=False)
-#         sighting.user = request.user
-#         sighting.save()
-#         return render(request, 'sightings/detail.html', {
-#         'sighting': sighting
-#     })
-#     context['form'] = form
-#     return render(request, 'sightings/sightings_create.html', context)
+@login_required
+def sightings_create(request):
+    context = {}
+    form = SightingForm(request.POST)
+    if form.is_valid():
+        sighting = form.save(commit=False)
+        sighting.user = request.user
+        sighting.save()
+        return render(request, 'sightings/detail.html', {
+        'sighting': sighting
+    })
+    context['form'] = form
+    return render(request, 'sightings/sightings_create.html', context)
 
 @login_required
 def sightings_update(request, sighting_id):
