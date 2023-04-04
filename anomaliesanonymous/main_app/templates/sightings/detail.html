@@ -19,6 +19,10 @@
             <p class="card-text bold mb-2">WHAT</p>
             <p class="card-text mb-2"><em>Shape:</em> {{ sighting.get_shape_display.capitalize }}</p>
             <p class="card-text">{{ sighting.description }}</p>
+            {% if user.id == sighting.user_id %}
+              <a href="{% url 'sightings_update' sighting.id %}" class="btn">Edit</a>
+              <a href="{% url 'sightings_delete' sighting.id %}" class="btn btn-delete">Delete</a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -62,8 +66,10 @@
             <div class="card-body">
               <p class="card-text">Posted: {{ comment.date_posted }}</p>
               <p class="card-text">Comment: {{ comment.comment }}</p>
-              <a href="{% url 'edit_comment' sighting.id comment.id %}" class="btn">Edit</a>
-              <a href="{% url 'delete_comment' sighting.id comment.id %}" class="btn">Delete</a>
+              {% if user.id == comment.user_id %}
+                <a href="{% url 'edit_comment' sighting.id comment.id %}" class="btn">Edit</a>
+                <a href="{% url 'delete_comment' sighting.id comment.id %}" class="btn btn-delete">Delete</a>
+              {% endif %}
             </div>
           </div>
         {% endfor %}
