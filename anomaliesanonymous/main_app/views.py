@@ -1,4 +1,3 @@
-
 # Python modules
 import os
 import uuid
@@ -9,13 +8,16 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.contrib import messages
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # App modules
 from .models import Sighting, Comment, Photo
 from .forms import SightingForm, CommentForm, DeleteCommentForm
-
 
 
 # Create your views here.
@@ -26,7 +28,8 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-
+# SIGHTINGS VIEWS 
+# -------------------------------------------------
 def sightings_index(request):
     page_number = request.GET.get('page', 1)
     per_page = 36  # Change this to the number of cards you want to load per request
@@ -38,39 +41,12 @@ def sightings_index(request):
         'sightings': sightings
     })
 
-
 def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
     comment_form = CommentForm()
     return render(request, 'sightings/detail.html', {
         'sighting': sighting,
         'comment_form': comment_form,
-    })
-
-
-def add_comment(request, sighting_id):
-    form = CommentForm(request.POST)
-    if form.is_valid():
-        new_comment = form.save(commit=False)
-        new_comment.sighting_id = sighting_id
-        new_comment.save()
-    return redirect('detail', sighting_id=sighting_id)
-
-
-class CommentEdit(UpdateView):
-  model = Comment
-  fields = ['comment']
-
-def delete_comment(request, sighting_id, comment_id):
-    form = DeleteCommentForm(request.POST)
-    sighting = get_object_or_404(Sighting, id=sighting_id)
-    comment = get_object_or_404(Comment, id=comment_id)
-    if request.method == "POST":
-        comment.delete()
-        return redirect('detail', sighting_id=sighting_id)
-    return render(request, 'comment/comment_delete.html', {
-        'form': form,
-        'sighting': sighting
     })
 
 def fetch_sightings(request):
@@ -84,16 +60,26 @@ def fetch_sightings(request):
     data = serializers.serialize('json', sightings) # Convert the data to JSON
     return JsonResponse({'data': data, 'has_next': sightings.has_next()})
 
-def sightings_create(request):
-    context = {}
-    form = SightingForm(request.POST)
-    if form.is_valid():
-        sighting = form.save()
-        return render(request, 'sightings/detail.html', {
-        'sighting': sighting
-    })
-    context['form'] = form
-    return render(request, 'sightings/sightings_create.html', context)
+class SightingFormView(LoginRequiredMixin, FormView):
+    template_name = 'sightings_create.html'
+    form_class = SightingForm
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+# def sightings_create(request):
+#     context = {}
+#     form = SightingForm(request.POST)
+#     if form.is_valid():
+#         sighting = form.save(commit=False)
+#         sighting.user = request.user
+#         sighting.save()
+#         return render(request, 'sightings/detail.html', {
+#         'sighting': sighting
+#     })
+#     context['form'] = form
+#     return render(request, 'sightings/sightings_create.html', context)
 
 def sightings_update(request, sighting_id):
     context = {}
@@ -107,15 +93,44 @@ def sightings_update(request, sighting_id):
     context["form"] = form
     return render(request, 'sightings/sightings_create.html', context)
 
-class SightingUpdate(UpdateView):
-    model = Sighting
-    fields = ['datetime', 'city', 'state', 'shape', 'duration', 'description']
-
-class SightingDelete(DeleteView):
+class SightingDelete(LoginRequiredMixin, DeleteView):
     model = Sighting
     success_url = '/sightings'
 
+# COMMENT VIEWS 
+# ------------------------------------------------------- #
+@login_required
+def add_comment(request, sighting_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.sighting_id = sighting_id
+        new_comment.save()
+    return redirect('detail', sighting_id=sighting_id)
 
+
+class CommentEdit(LoginRequiredMixin, UpdateView):
+  model = Comment
+  fields = ['comment']
+
+
+@login_required
+def delete_comment(request, sighting_id, comment_id):
+    form = DeleteCommentForm(request.POST)
+    sighting = get_object_or_404(Sighting, id=sighting_id)
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == "POST":
+        comment.delete()
+        return redirect('detail', sighting_id=sighting_id)
+    return render(request, 'comment/comment_delete.html', {
+        'form': form,
+        'sighting': sighting
+    })
+
+
+# PHOTO VIEWS 
+# -------------------------------------------------
+@login_required
 def add_photo(request, sighting_id):
     # photo-file maps to the "name" attr on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
@@ -136,3 +151,25 @@ def add_photo(request, sighting_id):
             print('An error occurred uploading file to S3')
             print(e)
     return redirect('detail', sighting_id=sighting_id)
+
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        # Create a 'user' form object that includes the data from the browser
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # Add user to the database
+            user = form.save()
+            # Log user in via code
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again.'
+    # There was a bad POST or GET request, so render signup.html with an empty form
+    form = UserCreationForm()
+    context = {
+        'form': form,
+        'error_message': error_message
+    }
+    return render(request, 'registration/signup.html', context)
