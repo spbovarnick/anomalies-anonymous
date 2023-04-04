@@ -1,4 +1,3 @@
-
 # Python modules
 import os
 import uuid
@@ -9,7 +8,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.contrib import messages
 
 # App modules
@@ -26,7 +25,8 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-
+# SIGHTINGS VIEWS 
+# -------------------------------------------------
 def sightings_index(request):
     page_number = request.GET.get('page', 1)
     per_page = 36  # Change this to the number of cards you want to load per request
@@ -38,7 +38,6 @@ def sightings_index(request):
         'sightings': sightings
     })
 
-
 def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
     comment_form = CommentForm()
@@ -47,7 +46,56 @@ def sightings_detail(request, sighting_id):
         'comment_form': comment_form,
     })
 
+def fetch_sightings(request):
+    page_number = request.GET.get('page', 1)
+    per_page = 100  # Change this to the number of cards you want to load per request
 
+    all_sightings = Sighting.objects.all().order_by('-datetime')
+    paginator = Paginator(all_sightings, per_page)
+    sightings = paginator.get_page(page_number)
+
+    data = serializers.serialize('json', sightings) # Convert the data to JSON
+    return JsonResponse({'data': data, 'has_next': sightings.has_next()})
+
+class SightingFormView(FormView):
+    template_name = 'sightings_create.html'
+    form_class = SightingForm
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+def sightings_create(request):
+    context = {}
+    form = SightingForm(request.POST)
+    if form.is_valid():
+        sighting = form.save(commit=False)
+        sighting.user = request.user
+        sighting.save()
+        return render(request, 'sightings/detail.html', {
+        'sighting': sighting
+    })
+    context['form'] = form
+    return render(request, 'sightings/sightings_create.html', context)
+
+def sightings_update(request, sighting_id):
+    context = {}
+    sighting = get_object_or_404(Sighting, id=sighting_id)
+    form = SightingForm(request.POST or None, instance=sighting)
+    if form.is_valid():
+        sighting = form.save()
+        return render(request, 'sightings/detail.html', {
+        'sighting': sighting
+    })
+    context["form"] = form
+    return render(request, 'sightings/sightings_create.html', context)
+
+class SightingDelete(DeleteView):
+    model = Sighting
+    success_url = '/sightings'
+
+# COMMENT VIEWS 
+# ------------------------------------------------------- #
 def add_comment(request, sighting_id):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -73,49 +121,9 @@ def delete_comment(request, sighting_id, comment_id):
         'sighting': sighting
     })
 
-def fetch_sightings(request):
-    page_number = request.GET.get('page', 1)
-    per_page = 100  # Change this to the number of cards you want to load per request
 
-    all_sightings = Sighting.objects.all().order_by('-datetime')
-    paginator = Paginator(all_sightings, per_page)
-    sightings = paginator.get_page(page_number)
-
-    data = serializers.serialize('json', sightings) # Convert the data to JSON
-    return JsonResponse({'data': data, 'has_next': sightings.has_next()})
-
-def sightings_create(request):
-    context = {}
-    form = SightingForm(request.POST)
-    if form.is_valid():
-        sighting = form.save()
-        return render(request, 'sightings/detail.html', {
-        'sighting': sighting
-    })
-    context['form'] = form
-    return render(request, 'sightings/sightings_create.html', context)
-
-def sightings_update(request, sighting_id):
-    context = {}
-    sighting = get_object_or_404(Sighting, id=sighting_id)
-    form = SightingForm(request.POST or None, instance=sighting)
-    if form.is_valid():
-        sighting = form.save()
-        return render(request, 'sightings/detail.html', {
-        'sighting': sighting
-    })
-    context["form"] = form
-    return render(request, 'sightings/sightings_create.html', context)
-
-class SightingUpdate(UpdateView):
-    model = Sighting
-    fields = ['datetime', 'city', 'state', 'shape', 'duration', 'description']
-
-class SightingDelete(DeleteView):
-    model = Sighting
-    success_url = '/sightings'
-
-
+# PHOTO VIEWS 
+# -------------------------------------------------
 def add_photo(request, sighting_id):
     # photo-file maps to the "name" attr on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)

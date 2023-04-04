@@ -8,7 +8,6 @@ from django.forms import ModelForm
 from django.forms.widgets import TextInput
 
 from .models import Sighting, Comment
-from django import forms
 
 class CommentForm(ModelForm):
     class Meta:
