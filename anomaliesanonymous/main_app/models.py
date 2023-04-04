@@ -113,7 +113,6 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-date_posted']
 
-
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     sighting = models.ForeignKey(Sighting, on_delete=models.CASCADE)
