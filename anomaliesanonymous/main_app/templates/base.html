@@ -43,16 +43,19 @@
           <ul class="navbar-nav me mb-2 mb-lg-0">
             {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Sign Out</a>
+                <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link button" href="{% url 'sightings_create' %}">Report A Sighting</a>
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="#">Sign In</a>
+                <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link button" href="{% url 'login' %}">Report A Sighting</a>
               </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link button" href="{% url 'sightings_create' %}">Report A Sighting</a>
-            </li>
           </ul>
         </div>
       </div>
