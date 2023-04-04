@@ -3,14 +3,20 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-5">Delete Comment</h1>
-
-    <h3>Are you sure you want to delete this comment?</h3>
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="submit" class="btn mb-4" value="Confirm">
-        <a class="btn" href="{% url 'detail' sighting.id %}">Cancel</a>
-    </form>
+  <div class="row justify-content-center">
+    <div class="card col-5">
+      <div class="card-body">
+        <h3 class="mb-4">Are you sure you want to delete this comment?</h3>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="d-grid d-md-flex">
+            <input type="submit" class="btn btn-delete me-md-2 mb-2" value="Confirm">
+            <a class="btn mb-2" href="{% url 'detail' sighting.id %}">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
 {% endblock %}

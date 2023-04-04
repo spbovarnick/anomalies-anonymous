@@ -23,9 +23,23 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            {% for photo in sighting.photo_set.all %}
+              <img class="img-fluid" src="{{photo.url}}">
+            {% empty %}
+              <p class="card-text">No Photos Uploaded</p>
+            {% endfor %}
+          </div>
+        </div>
         <div class="card">
           <div class="card-body">
-            <p class="card-text">Placeholder for image</p>
+            <form action="{% url 'add_photo' sighting.id %}" enctype="multipart/form-data" method="POST" class="">
+              {% csrf_token %}
+              <input type="file" name="photo-file">
+              <br><br>
+              <button type="submit" class="btn">Upload Photo</button>
+          </form>
           </div>
         </div>
       </div>

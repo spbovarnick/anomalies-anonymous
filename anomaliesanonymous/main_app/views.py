@@ -1,5 +1,8 @@
 
 # Python modules
+import os
+import uuid
+import boto3
 
 # Django modules
 from django.core.paginator import Paginator
@@ -10,7 +13,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 
 # App modules
-from .models import Sighting, Comment
+from .models import Sighting, Comment, Photo
 from .forms import SightingForm, CommentForm, DeleteCommentForm
 
 
@@ -111,3 +114,25 @@ class SightingUpdate(UpdateView):
 class SightingDelete(DeleteView):
     model = Sighting
     success_url = '/sightings'
+
+
+def add_photo(request, sighting_id):
+    # photo-file maps to the "name" attr on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # We need a unique "key" (filename) for S3
+        # It needs to keep the same file extension as the file that was uploaded (.png, .jpg, .svg, etc)
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # Just in case something goes wrong
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            # Build the full URL string
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            # We can assign to sighting_id or sighting (if you have a sighting object)
+            Photo.objects.create(url=url, sighting_id=sighting_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    return redirect('detail', sighting_id=sighting_id)
