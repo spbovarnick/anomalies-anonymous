@@ -43,6 +43,7 @@ def sightings_index(request):
 
 def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
+    sighting.user_id = request.user
     comment_form = CommentForm()
     return render(request, 'sightings/detail.html', {
         'sighting': sighting,
@@ -63,6 +64,7 @@ def fetch_sightings(request):
 class SightingFormView(LoginRequiredMixin, FormView):
     template_name = 'sightings_create.html'
     form_class = SightingForm
+    success_url = '/sightings'
     
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -81,6 +83,7 @@ class SightingFormView(LoginRequiredMixin, FormView):
 #     context['form'] = form
 #     return render(request, 'sightings/sightings_create.html', context)
 
+@login_required
 def sightings_update(request, sighting_id):
     context = {}
     sighting = get_object_or_404(Sighting, id=sighting_id)
@@ -104,6 +107,7 @@ def add_comment(request, sighting_id):
     form = CommentForm(request.POST)
     if form.is_valid():
         new_comment = form.save(commit=False)
+        new_comment.user = request.user
         new_comment.sighting_id = sighting_id
         new_comment.save()
     return redirect('detail', sighting_id=sighting_id)
