@@ -11,12 +11,16 @@
             <form method="POST" action="{% url 'signup' %}" class="">
                 {% csrf_token %}
                 {{ form| crispy }}
-                <input type="submit" class="btn mb-5 float-end" value="Sign Up">
+                <input type="submit" class="btn mb-4" value="Sign Up">
             </form>
             <p class="mt-5">Already have an account? </p>
             <a class="btn" href="{% url 'login' %}">Log In</a>
         </div>
     </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <img class="cow" src="/static/assets/cow.png">
 </div>
 
 {% endblock %}

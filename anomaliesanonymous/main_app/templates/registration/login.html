@@ -11,12 +11,18 @@
                 {% csrf_token %}
                 {{ form| crispy }}
                 <input type="hidden" name="next" value="{{ next }}">
-                <button type="submit" class="btn float-end mb-5">Log In</button>
+                <button type="submit" class="btn mb-4">Log In</button>
             </form>
-            <p>Don't have an account yet? </p>
-            <a class="btn" href="{% url 'signup' %}">Create Account</a>
+            <div>
+                <p>Don't have an account yet? </p>
+                <a class="btn" href="{% url 'signup' %}">Create Account</a>
+            </div>
         </div>
     </div>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <img class="cow" src="/static/assets/cow.png">
 </div>
 
 {% endblock %}

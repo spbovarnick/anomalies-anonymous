@@ -32,6 +32,18 @@ a.nav-link {
     padding: 5px;
 }
 
+button.btn {
+    font-weight: 500;
+}
+
+a.btn {
+    font-weight: 500;
+}
+
+input.btn {
+    font-weight: 500;
+}
+
 .btn {
     background-color: rgb(54, 70, 110);
     color: white;
@@ -76,7 +88,7 @@ a.navbar-brand:hover {
 a.nav-link.button {
     background-color: white;
     color: rgb(51, 68, 94);
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 5px;
     margin: 3px 7px 0 0;
     opacity: .7;
