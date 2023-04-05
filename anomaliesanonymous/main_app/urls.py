@@ -4,7 +4,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
     path('sightings/', views.sightings_index, name='index'),
-    path('sightings/user-index/', views.user_index, name='user_index'),
+    path('sightings/account/', views.account, name='account'),
     path('sightings/<int:sighting_id>/', views.sightings_detail, name='detail'),
     path('sightings/<int:sighting_id>/add_comment/', views.add_comment, name='add_comment'),
     path('sightings/<int:fk>/edit_comment/<int:pk>/', views.CommentEdit.as_view(), name='edit_comment'),
@@ -15,4 +15,5 @@ urlpatterns = [
     path('sightings/<int:pk>/delete/', views.SightingDelete.as_view(), name='sightings_delete'),
     path('sightings/<int:sighting_id>/add_photo/', views.add_photo, name='add_photo'),
     path('accounts/signup/', views.signup, name='signup'),
+    path('sightings/map/', views.map, name='map'),
 ]

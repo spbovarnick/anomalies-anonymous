@@ -10,10 +10,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <header>
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark">
+    <nav class="navbar header autohide fixed-top navbar-expand-md navbar-dark">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -43,18 +44,35 @@
           <ul class="navbar-nav me mb-2 mb-lg-0">
             {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
+                <a class="nav-link button" href="{% url 'sightings_create' %}">Report Sighting</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link button" href="{% url 'sightings_create' %}">Report A Sighting</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                  <a class="dropdown-item" href="{% url 'account' %}">My Account</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                </div>
               </li>
+
+              
+
             {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Sign In</a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link button" href="{% url 'login' %}">Report A Sighting</a>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                  <a class="dropdown-item" href="{% url 'account' %}">Sign In</a>
+                  <a class="dropdown-item" href="{% url 'signup' %}">Create Account</a>
+                </div>
+              </li>
+              
             {% endif %}
           </ul>
         </div>
@@ -69,5 +87,41 @@
   <footer class="fixed-bottom text-center">
       <p>All Rights Reserved, &copy; 2023 Anomalies Anonymous&nbsp;</p>
   </footer>
+
+  <script>
+  $(document).ready(function() {
+    // Show dropdown menu on click
+    $('#accountDropdown').on('click', function(e) {
+      e.preventDefault();
+      $(this).parent().toggleClass('show');
+      $(this).attr('aria-expanded', function(index, attr) {
+        return attr == 'true' ? 'false' : 'true';
+      });
+      $(this).next('.dropdown-menu').toggleClass('show');
+    });
+
+    // Hide dropdown menu on outside click
+    $(document).on('click', function(e) {
+      if (!$('#accountDropdown').is(e.target) && $('#accountDropdown').has(e.target).length === 0 && $('.show').has(e.target).length === 0) {
+        $('#accountDropdown').attr('aria-expanded', 'false');
+        $('#accountDropdown').parent().removeClass('show');
+        $('#accountDropdown').next('.dropdown-menu').removeClass('show');
+      }
+    });
+  });
+
+
+  const header = document.querySelector('.header')
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      header.classList.add('header-scrolled');
+    } else if (window.scrollY <= 30) {
+      header.classList.remove('header-scrolled');
+    }
+  });
+
+
+  </script>
+
 </body>
 </html>

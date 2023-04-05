@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <input type="submit" value="Report Sighting" class="btn">
-</form>
+<div class="container">
+    <h1 class="mb-5">Report A Sighting</h1>
+    <div class="mb-5 card">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" class="btn">
+        </form>
+    </div>
+</div>
 
 {% endblock %}

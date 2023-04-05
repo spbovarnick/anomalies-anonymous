@@ -62,9 +62,9 @@ def fetch_sightings(request):
     return JsonResponse({'data': data, 'has_next': sightings.has_next()})
 
 @login_required
-def user_index(request):
+def account(request):
     sightings = Sighting.objects.filter(user=request.user)
-    return render(request, 'sightings/user-index.html', {
+    return render(request, 'sightings/account.html', {
         'sightings': sightings
     })
 
@@ -174,3 +174,8 @@ def signup(request):
         'error_message': error_message
     }
     return render(request, 'registration/signup.html', context)
+
+# MAP VIEW
+# -------------------------------------------------
+def map(request):
+    return render(request, 'sightings/map.html')
