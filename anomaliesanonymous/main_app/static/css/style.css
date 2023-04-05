@@ -23,7 +23,7 @@ body {
 
 .header-scrolled {
     backdrop-filter: blur(25px);
-    background-color: rgb(54, 70, 110, .4);
+    background-color: rgb(54, 70, 110, .1);
     transition: ease-in-out .3s;
 }
 
@@ -32,19 +32,33 @@ a.nav-link {
     padding: 5px;
 }
 
+button.btn {
+    font-weight: 500;
+}
+
+a.btn {
+    font-weight: 500;
+}
+
+input.btn {
+    font-weight: 500;
+}
+
 .btn {
-    background-color: rgb(54, 70, 110);
-    color: white;
+    background-color: white;
+    color: rgb(54, 70, 110);
     border: none;
+    transition: .25s;
 }
 
 .btn:hover {
-    background-color: rgb(70, 93, 149);
+    background-color: rgb(197, 197, 197);
     color: white;
 }
 
 .btn-delete {
     background-color: rgb(214, 48, 48);
+    color: white;
 }
 
 .btn-delete:hover {
@@ -60,6 +74,11 @@ a.nav-link {
     transform: scale(1.025);
 }
 
+.card {
+    background-color: #455c80;
+    border: none;
+    color: white
+}
 
 a.navbar-brand {
     color: rgb(24, 39, 77);
@@ -77,15 +96,15 @@ a.navbar-brand:hover {
 a.nav-link.button {
     background-color: white;
     color: rgb(51, 68, 94);
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 5px;
     margin: 3px 7px 0 0;
-    opacity: .7;
     transition: .4s;
 }
 
 a.nav-link.button:hover {
-    opacity: 1;
+    background-color: rgb(197, 197, 197);
+    color: white;
 }
 
 img#account-logo {
@@ -129,8 +148,13 @@ img#account-logo {
     font-weight: 700;
 }
 
+textarea#id_comment {
+    height: 100px;
+    background-color: rgb(224, 224, 224);
+}
+
 p.card-text.bold {
-    color: rgb(69, 69, 125);
+    color: rgb(107, 172, 237);
     font-weight: 700;
     font-style: italic;
     font-size: 1.15rem;
