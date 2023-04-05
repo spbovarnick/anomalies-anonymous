@@ -116,6 +116,13 @@ img#account-logo {
     transform: translateY(-100vh) rotate(45deg);
 }
 
+.grow {
+    transition: all .4s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.05);
+}
 
 #report-number {
     font-size: 2rem;
