@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="mb-5">Search Results</h1>
+  <div class="container">
+    <div class="row">
+      {% for sighting in sightings %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Report #{{ sighting.id }}</h5>
+            <p class="card-text">City: {{ sighting.city }}</p>
+            <p class="card-text">State: {{ sighting.state }}</p>
+            <p class="card-text">When: {{ sighting.datetime|date:"M. d, Y, P" }}</p>
+            <div class="text-center">
+              <a href="{% url 'detail' sighting.id %}" class="btn">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+        <p>No sightings found for your search.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

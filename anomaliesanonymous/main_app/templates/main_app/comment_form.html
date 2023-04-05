@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container">
-    <h1 class="mb-5">Edit Comment</h1>
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          {{ form }}
-        </div>
-        <button type="submit" class="btn mb-4">Submit</button>
-    </form>
+  <div class="justify-content-center">
+    <div class="col-lg-10 col-md-12 col-sm-12 mb-4 px-4" style="margin: 0 auto; max-width: 600px;">
+      <h1 class="mb-5">Edit Comment</h1>
+      <form action="" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            {{ form|crispy }}
+          </div>
+          <button type="submit" class="btn mb-4">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}
