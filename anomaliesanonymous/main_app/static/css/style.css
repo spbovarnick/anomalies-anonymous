@@ -23,6 +23,8 @@ body {
 
 .header-scrolled {
     backdrop-filter: blur(25px);
+    background-color: rgb(54, 70, 110, .4);
+    transition: ease-in-out .3s;
 }
 
 a.nav-link {
