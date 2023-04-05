@@ -107,7 +107,7 @@ img#account-logo {
 
 .cow {
     position: absolute;
-    bottom: 25px;
+    bottom: 30px;
     z-index: -50;
     transition: all 8s ease-in;
 }
