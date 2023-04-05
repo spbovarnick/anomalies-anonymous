@@ -3,6 +3,7 @@ import os
 import uuid
 import boto3
 import folium
+import geocoder
 from folium import plugins
 
 # Django modules
@@ -180,13 +181,14 @@ def signup(request):
 # MAP VIEW
 # -------------------------------------------------
 def map(request):
+    user_loc = geocoder.ip('me').latlng
     sightings = Sighting.objects.all()
-
-    sightings_list = Sighting.objects.values_list('latitude', 'longitude', 'id')
-    # print(sightings_list)
-    # for sighting in sightings:
-    #     sighting
-    base_map = folium.Map(location=[37.0902, -95.7129], tiles='CartoDB Dark_Matter', zoom_start=4)
+    sightings_list = Sighting.objects.values_list('latitude', 'longitude')
+    base_map = folium.Map(location=user_loc, tiles='CartoDB Dark_Matter', zoom_start=7)
+    marker_list = []
+    for sighting in sightings:
+        marker_list.append([sighting.latitude.__float__(), sighting.longitude.__float__(), sighting.id])
+    folium.plugins.FastMarkerCluster(marker_list).add_to(base_map)
     plugins.HeatMap(sightings_list).add_to(base_map)
     base_map = base_map._repr_html_()
     return render(request, 'sightings/map.html', {
