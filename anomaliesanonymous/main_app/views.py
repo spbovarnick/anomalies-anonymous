@@ -62,6 +62,13 @@ def fetch_sightings(request):
     return JsonResponse({'data': data, 'has_next': sightings.has_next()})
 
 @login_required
+def user_index(request):
+    sightings = Sighting.objects.filter(user=request.user)
+    return render(request, 'sightings/user-index.html', {
+        'sightings': sightings
+    })
+
+@login_required
 def sightings_create(request):
     context = {}
     form = SightingForm(request.POST)
