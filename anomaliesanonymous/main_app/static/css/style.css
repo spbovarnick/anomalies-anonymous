@@ -16,9 +16,13 @@ html {
 }
 
 body {
-    padding-top: 10vh;
+    padding: 10vh 0;
     background-color: transparent;
     color: white;
+}
+
+.header-scrolled {
+    backdrop-filter: blur(25px);
 }
 
 a.nav-link {
