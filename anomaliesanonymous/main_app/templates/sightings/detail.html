@@ -30,7 +30,7 @@
             {% for photo in sighting.photo_set.all %}
               <img class="img-fluid" src="{{photo.url}}">
             {% empty %}
-              <p class="card-text">No Photos Uploaded</p>
+              <img class="img-fluid" src="/static/assets/no-photo-default.png">
             {% endfor %}
           </div>
         </div>
