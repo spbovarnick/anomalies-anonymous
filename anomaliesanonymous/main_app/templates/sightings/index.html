@@ -4,9 +4,15 @@
 {% block content %}
 <div class="container">
 
-  <h1 class="mb-5">Recent Sightings</h1>
+  <h1 class="mb-4">Recent Sightings</h1>
+    <div class="col-md-6 col-lg-4 mb-6"></div>
+    <form action="{% url 'search' %}" method="GET" class="input-group rounded mb-3" style="max-width: 375px;">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="q">
+        <span>
+          <button class="btn btn-search" style="background-color: transparent;" type="submit"><img src="/static/assets/search.png"></button>
+        </span>
+    </form>
     <div class="row" id="sightings-row">
-
       {% for sighting in sightings %}
       <div class="col-md-6 col-lg-4 mb-4">
         <div class="card grow h-100">
