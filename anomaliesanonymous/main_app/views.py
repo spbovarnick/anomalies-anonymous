@@ -76,9 +76,10 @@ def sightings_create(request):
         sighting = form.save(commit=False)
         sighting.user = request.user
         sighting.save()
-        return render(request, 'sightings/detail.html', {
-        'sighting': sighting
-    })
+        return redirect('detail', sighting_id=sighting.id)
+    #     return render(request, 'sightings/detail.html', {
+    #     'sighting': sighting
+    # })
     context['form'] = form
     return render(request, 'sightings/sightings_create.html', context)
 
