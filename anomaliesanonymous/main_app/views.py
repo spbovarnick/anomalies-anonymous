@@ -176,8 +176,9 @@ def signup(request):
     }
     return render(request, 'registration/signup.html', context)
 
-# This view function takes a search query from the GET parameters and filters the Sighting objects based on the city or state fields.
-# If there's no query, it returns an empty queryset.
+
+# SEARCH VIEWS
+# -------------------------------------------------
 def sightings_search(request):
     query = request.GET.get('q', '')
     sightings = None # Empty queryset as default
@@ -185,4 +186,7 @@ def sightings_search(request):
         sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query)).order_by('-datetime')
     else:
         sightings = Sighting.objects.none() # Empty queryset as default
-    return render(request, 'sightings/search.html', {'sightings': sightings, 'query': query})
+    return render(request, 'sightings/search.html', {
+        'sightings': sightings, 
+        'query': query
+    })

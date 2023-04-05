@@ -143,6 +143,10 @@ img#account-logo {
     transform: scale(1.05);
 }
 
+.blue {
+    color: rgb(120, 178, 236);
+}
+
 #report-number {
     font-size: 2rem;
     font-weight: 700;
@@ -150,11 +154,10 @@ img#account-logo {
 
 textarea#id_comment {
     height: 100px;
-    background-color: rgb(224, 224, 224);
 }
 
 p.card-text.bold {
-    color: rgb(107, 172, 237);
+    color: rgb(120, 178, 236);
     font-weight: 700;
     font-style: italic;
     font-size: 1.15rem;

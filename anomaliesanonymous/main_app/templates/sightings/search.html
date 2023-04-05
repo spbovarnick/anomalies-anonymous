@@ -1,26 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="mb-5">Search Results</h1>
-  <div class="container">
-    <div class="row">
+<div class="container">
+  <h1 class="mb-5">Recent Sightings</h1>
+  <div class="col-md-6 col-lg-4 mb-6"></div>
+    <form action="{% url 'search' %}" method="GET" class="input-group rounded mb-3" style="max-width: 375px;">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="q">
+        <span>
+          <button class="btn btn-search" style="background-color: transparent;" type="submit"><img src="/static/assets/search.png"></button>
+        </span>
+    </form>
+    <h3 class="mt-4 mb-3">Search Results for <em class="blue">{{ query }}</em></h3>
+    <div class="row" id="sightings-row">
       {% for sighting in sightings %}
       <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title mb-3">Report #{{ sighting.id }}</h5>
-            <p class="card-text">City: {{ sighting.city }}</p>
-            <p class="card-text">State: {{ sighting.state }}</p>
-            <p class="card-text">When: {{ sighting.datetime|date:"M. d, Y, P" }}</p>
-            <div class="text-center">
-              <a href="{% url 'detail' sighting.id %}" class="btn">Details</a>
+        <div class="card grow h-100">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Report <em class="blue">#{{ sighting.id }}</em></h5>
+                <p class="card-text">{{ sighting.datetime }}</p>
+                <p class="card-text">City: {{ sighting.city }}</p>
+                <p class="card-text">State: {{ sighting.state }}</p>
+                <div class="text-center">
+                    <a href="{% url 'detail' sighting.id %}" class="btn">Details</a>
+                </div>
+                <span class="position-absolute bottom-0 start-0 m-3"><a href="#"><img src="/static/assets/arrow-up-bold.png"></a></span>
+                <span class="position-absolute bottom-0 end-0 m-3"><a href="#"><img src="/static/assets/arrow-down-bold.png"></a></span>
             </div>
-          </div>
         </div>
       </div>
-      {% empty %}
-        <p>No sightings found for your search.</p>
       {% endfor %}
     </div>
-  </div>
+</div>
 {% endblock %}
