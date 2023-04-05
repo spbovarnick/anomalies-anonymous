@@ -180,7 +180,14 @@ def signup(request):
 # MAP VIEW
 # -------------------------------------------------
 def map(request):
+    sightings = Sighting.objects.all()
+
+    sightings_list = Sighting.objects.values_list('latitude', 'longitude', 'id')
+    # print(sightings_list)
+    # for sighting in sightings:
+    #     sighting
     base_map = folium.Map(location=[37.0902, -95.7129], tiles='CartoDB Dark_Matter', zoom_start=4)
+    plugins.HeatMap(sightings_list).add_to(base_map)
     base_map = base_map._repr_html_()
     return render(request, 'sightings/map.html', {
         'base_map': base_map
