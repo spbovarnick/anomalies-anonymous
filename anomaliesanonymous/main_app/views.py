@@ -2,6 +2,8 @@
 import os
 import uuid
 import boto3
+import folium
+from folium import plugins
 
 # Django modules
 from django.core.paginator import Paginator
@@ -178,4 +180,10 @@ def signup(request):
 # MAP VIEW
 # -------------------------------------------------
 def map(request):
-    return render(request, 'sightings/map.html')
+    base_map = folium.Map(location=[37.0902, -95.7129], tiles='CartoDB Dark_Matter', zoom_start=4)
+    base_map = base_map._repr_html_()
+    return render(request, 'sightings/map.html', {
+        'base_map': base_map
+    })
+    
+    
