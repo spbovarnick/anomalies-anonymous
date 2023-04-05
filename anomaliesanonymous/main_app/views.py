@@ -14,6 +14,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 # App modules
 from .models import Sighting, Comment, Photo
@@ -28,7 +29,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-# SIGHTINGS VIEWS 
+# SIGHTINGS VIEWS
 # -------------------------------------------------
 def sightings_index(request):
     page_number = request.GET.get('page', 1)
@@ -97,7 +98,7 @@ class SightingDelete(LoginRequiredMixin, DeleteView):
     model = Sighting
     success_url = '/sightings'
 
-# COMMENT VIEWS 
+# COMMENT VIEWS
 # ------------------------------------------------------- #
 @login_required
 def add_comment(request, sighting_id):
@@ -129,7 +130,7 @@ def delete_comment(request, sighting_id, comment_id):
     })
 
 
-# PHOTO VIEWS 
+# PHOTO VIEWS
 # -------------------------------------------------
 @login_required
 def add_photo(request, sighting_id):
@@ -174,3 +175,14 @@ def signup(request):
         'error_message': error_message
     }
     return render(request, 'registration/signup.html', context)
+
+# This view function takes a search query from the GET parameters and filters the Sighting objects based on the city or state fields.
+# If there's no query, it returns an empty queryset.
+def sightings_search(request):
+    query = request.GET.get('q', '')
+    sightings = None # Empty queryset as default
+    if query:
+        sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query)).order_by('-datetime')
+    else:
+        sightings = Sighting.objects.none() # Empty queryset as default
+    return render(request, 'sightings/search.html', {'sightings': sightings, 'query': query})
