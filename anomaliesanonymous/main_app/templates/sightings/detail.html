@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 
 {% block content %}
@@ -19,10 +21,6 @@
             <p class="card-text bold mb-2">WHAT</p>
             <p class="card-text mb-2"><em>Shape:</em> {{ sighting.get_shape_display.capitalize }}</p>
             <p class="card-text">{{ sighting.description }}</p>
-            <!-- {% if user.id == sighting.user_id.id %}
-              <a href="{% url 'sightings_update' sighting.id %}" class="btn">Edit</a>
-              <a href="{% url 'sightings_delete' sighting.id %}" class="btn btn-delete">Delete</a>
-            {% endif %} -->
           </div>
         </div>
       </div>
@@ -55,7 +53,7 @@
       <form id="comment-form" action="{% url 'add_comment' sighting.id %}" method="POST">
           {% csrf_token %}
         <div class="form-group">
-          {{ comment_form }}
+          {{ comment_form|crispy }}
         </div>
         <button type="submit" class="btn btn-primary mb-4">Add Comment</button>
       </form>
