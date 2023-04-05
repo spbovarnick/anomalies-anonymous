@@ -2,10 +2,12 @@
 {% block content %}
 
 <div class="container">
-    <h1>Your Sightings</h1>
+    <h1 class="mb-5">Your Account</h1>
     <div class="row">
+    <h3 class="mb-3">Your Reported Sightings</h3>
+
         {% for sighting in sightings %}
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-3"> Report #{{ sighting.id }}</h4>
@@ -13,9 +15,11 @@
                     <p class="card-text">City: {{ sighting.city }}</p>
                     <p class="card-text">State: {{ sighting.state }}</p>
                     <div class="text-center">
-                        <a href="{% url 'detail' sighting.id %}" class="btn">Details</a>
-                        <a href="{% url 'sightings_update' sighting.id %}" class="btn">Edit</a>
-                        <a href="{% url 'sightings_delete' sighting.id %}" class="btn btn-delete">Delete</a>
+                        <a href="{% url 'detail' sighting.id %}" class="btn float-start">Details</a>
+                        <div class="float-end">
+                            <a href="{% url 'sightings_update' sighting.id %}" class="btn">Edit</a>
+                            <a href="{% url 'sightings_delete' sighting.id %}" class="btn btn-delete">Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>

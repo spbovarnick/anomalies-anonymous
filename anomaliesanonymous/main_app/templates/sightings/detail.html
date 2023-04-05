@@ -19,10 +19,10 @@
             <p class="card-text bold mb-2">WHAT</p>
             <p class="card-text mb-2"><em>Shape:</em> {{ sighting.get_shape_display.capitalize }}</p>
             <p class="card-text">{{ sighting.description }}</p>
-            {% if user.id == sighting.user_id %}
+            <!-- {% if user.id == sighting.user_id.id %}
               <a href="{% url 'sightings_update' sighting.id %}" class="btn">Edit</a>
               <a href="{% url 'sightings_delete' sighting.id %}" class="btn btn-delete">Delete</a>
-            {% endif %}
+            {% endif %} -->
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
           </div>
         {% endfor %}
       {% else %}
-        <div class="card mb-3">
+        <div class="card mb-5">
           <div class="card-body">
             <p class="card-text">No comments yet.</p>
           </div>

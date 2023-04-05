@@ -23,7 +23,7 @@ body {
 
 a.nav-link {
     color: white;
-    margin: 3px 7px 0 0px;
+    padding: 5px;
 }
 
 .btn {
@@ -60,6 +60,10 @@ a.navbar-brand {
     font-weight: 600;
 }
 
+a.nav-link.navbar-brand {
+    margin-right: 30px;
+}
+
 a.navbar-brand:hover {
     color: rgb(54, 70, 110);
 }
@@ -67,9 +71,9 @@ a.navbar-brand:hover {
 a.nav-link.button {
     background-color: white;
     color: rgb(51, 68, 94);
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 5px;
-    margin: 3px 0 0 7px;
+    margin: 3px 7px 0 0;
     opacity: .7;
     transition: .4s;
 }
@@ -77,6 +81,35 @@ a.nav-link.button {
 a.nav-link.button:hover {
     opacity: 1;
 }
+
+img#account-logo {
+    padding-top: 3px;
+}
+
+.dropdown-menu {
+    left: -125px;
+    top: 45px;
+}
+
+.dropdown-item {
+    text-align: right;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.cow {
+    position: absolute;
+    bottom: 25px;
+    z-index: -50;
+    transition: all 8s ease-in;
+}
+
+.cow:hover {
+    transform: translateY(-100vh) rotate(45deg);
+}
+
 
 #report-number {
     font-size: 2rem;
@@ -94,4 +127,3 @@ footer {
     color: rgb(169, 169, 169);
     font-size: 12px;
 }
-

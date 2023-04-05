@@ -10,8 +10,8 @@
         <form action="" method="POST">
           {% csrf_token %}
           <div class="d-grid d-md-flex">
-            <input type="submit" class="btn btn-delete me-md-2 mb-2" value="Confirm">
-            <a class="btn mb-2" href="{% url 'detail' sighting.id %}">Cancel</a>
+            <input type="submit" class="btn btn-delete me-md-1 mb-1" value="Yes, delete">
+            <a class="btn mb-1" href="{% url 'detail' sighting.id %}">Cancel</a>
           </div>
         </form>
       </div>
