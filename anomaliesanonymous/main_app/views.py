@@ -57,7 +57,6 @@ def sightings_detail(request, sighting_id):
 def fetch_sightings(request):
     page_number = request.GET.get('page', 1)
     per_page = 100  # Change this to the number of cards you want to load per request
-
     all_sightings = Sighting.objects.all().order_by('-datetime')
     paginator = Paginator(all_sightings, per_page)
     sightings = paginator.get_page(page_number)
@@ -94,7 +93,7 @@ def sightings_update(request, sighting_id):
         return render(request, 'sightings/detail.html', {
         'sighting': sighting
     })
-    context["form"] = form
+    context = {"form": form, 'sighting': sighting}
     return render(request, 'sightings/sightings_create.html', context)
 
 class SightingDelete(LoginRequiredMixin, DeleteView):
@@ -203,14 +202,15 @@ def map(request):
                 "popup.setContent(`Report #${row[2]}`);"
                 "marker.bindPopup(popup);"
                 'return marker};')
-    plugins.HeatMap(sightings_list).add_to(base_map)
+    plugins.HeatMap(sightings_list, radius=11).add_to(base_map)
     folium.plugins.FastMarkerCluster(marker_list, callback=callback).add_to(base_map)
     base_map = base_map._repr_html_()
     return render(request, 'sightings/map.html', {
         'base_map': base_map
     })
     
-    
+# SEARCH VIEW
+# -------------------------------------------------
 # This view function takes a search query from the GET parameters and filters the Sighting objects based on the city or state fields.
 # If there's no query, it returns an empty queryset.
 def sightings_search(request):
