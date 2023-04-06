@@ -19,8 +19,7 @@
             <div class="card-body">
               <h5 class="card-title mb-3">Report <em class="blue">#{{ sighting.id }}</em></h5>
                 <p class="card-text">{{ sighting.datetime }}</p>
-                <p class="card-text">City: {{ sighting.city }}</p>
-                <p class="card-text">State: {{ sighting.state }}</p>
+                <p class="card-text">Location: {{ sighting.city }}, {{ sighting.state }}</p>
                 <div class="text-center">
                     <a href="{% url 'detail' sighting.id %}" class="btn">Details</a>
                 </div>
