@@ -211,8 +211,8 @@ def map(request):
     })
     
     
-# SEARCH VIEW
-# -------------------------------------------------
+# This view function takes a search query from the GET parameters and filters the Sighting objects based on the city or state fields.
+# If there's no query, it returns an empty queryset.
 def sightings_search(request):
     query = request.GET.get('q', '')
     # Empty querysets as default

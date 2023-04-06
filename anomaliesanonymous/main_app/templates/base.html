@@ -16,6 +16,7 @@
 <body>
   <header>
     <nav class="navbar header autohide header autohide fixed-top navbar-expand-md navbar-dark">
+
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -57,6 +58,9 @@
                   <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                 </div>
               </li>
+
+              
+
             {% else %}
               <li class="nav-item">
                 <a class="nav-link button" href="{% url 'login' %}">Report A Sighting</a>
@@ -66,10 +70,11 @@
                   <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="accountDropdown">
-                  <a class="dropdown-item" href="{% url 'account' %}">Log In</a>
+                  <a class="dropdown-item" href="{% url 'account' %}">Sign In</a>
                   <a class="dropdown-item" href="{% url 'signup' %}">Create Account</a>
                 </div>
               </li>        
+
             {% endif %}
           </ul>
         </div>
@@ -84,41 +89,5 @@
   <footer class="fixed-bottom text-center">
       <p>All Rights Reserved, &copy; 2023 Anomalies Anonymous&nbsp;</p>
   </footer>
-
-  <script>
-  $(document).ready(function() {
-    // Show dropdown menu on click
-    $('#accountDropdown').on('click', function(e) {
-      e.preventDefault();
-      $(this).parent().toggleClass('show');
-      $(this).attr('aria-expanded', function(index, attr) {
-        return attr == 'true' ? 'false' : 'true';
-      });
-      $(this).next('.dropdown-menu').toggleClass('show');
-    });
-
-    // Hide dropdown menu on outside click
-    $(document).on('click', function(e) {
-      if (!$('#accountDropdown').is(e.target) && $('#accountDropdown').has(e.target).length === 0 && $('.show').has(e.target).length === 0) {
-        $('#accountDropdown').attr('aria-expanded', 'false');
-        $('#accountDropdown').parent().removeClass('show');
-        $('#accountDropdown').next('.dropdown-menu').removeClass('show');
-      }
-    });
-  });
-
-
-  const header = document.querySelector('.header')
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      header.classList.add('header-scrolled');
-    } else if (window.scrollY <= 30) {
-      header.classList.remove('header-scrolled');
-    }
-  });
-
-
-  </script>
-
 </body>
 </html>

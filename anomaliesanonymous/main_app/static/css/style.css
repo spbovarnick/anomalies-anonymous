@@ -16,7 +16,7 @@ html {
 }
 
 body {
-    padding: 10vh 0;
+    padding-top: 10vh;
     background-color: transparent;
     color: white;
 }
@@ -32,24 +32,11 @@ a.nav-link {
     padding: 5px;
 }
 
-button.btn {
-    font-weight: 500;
-}
-
-a.btn {
-    font-weight: 500;
-}
-
-input.btn {
-    font-weight: 500;
-}
-
 .btn {
     background-color: white;
-    color: rgb(51, 68, 94);
+    color: rgb(54, 70, 110);
     border: none;
     transition: .25s;
-    font-weight: 500;
 }
 
 .btn:hover {
@@ -81,19 +68,10 @@ input.btn {
     transform: scale(1.025);
 }
 
-.card {
-    background-color: #455c80;
-    border: none;
-    color: white
-}
 
 a.navbar-brand {
     color: rgb(24, 39, 77);
     font-weight: 600;
-}
-
-a.nav-link.navbar-brand {
-    margin-right: 30px;
 }
 
 a.navbar-brand:hover {
@@ -141,7 +119,6 @@ img#account-logo {
 
 .cow:hover {
     transform: translateY(-100vh) rotate(45deg);
-    animation: getBrighter 8s ease-in-out;
 }
 
 img#account-logo {
@@ -186,17 +163,13 @@ img#account-logo {
     transform: scale(1.05);
 }
 
-.blue {
-    color: rgb(120, 178, 236);
-}
-
 #report-number {
     font-size: 2rem;
     font-weight: 700;
 }
 
 p.card-text.bold {
-    color: rgb(120, 178, 236);
+    color: rgb(107, 172, 237);
     font-weight: 700;
     font-style: italic;
     font-size: 1.15rem;
