@@ -2,22 +2,7 @@
 
 {% block content %}
 <div class="container">
-    <div class="justify-content-center">
-      <div class="col-lg-10 col-md-12 col-sm-12 mb-4 px-4" style="margin: 0 auto; max-width: 600px;">
-            <h1 class="mb-5">Log In</h1>
-            <form method="POST" action="{% url 'login' %}" class="mb-5">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input type="hidden" name="next" value="{{ next }}">
-                <button type="submit" class="btn mb-4">Log In</button>
-            </form>
-            <div>
-                <p>Don't have an account yet? </p>
-                <a class="btn" href="{% url 'signup' %}">Create Account</a>
-            </div>
-        </div>
-    </div>
-</div>
+    <h1 class="mb-5">Log In</h1>
 
     <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}

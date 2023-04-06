@@ -1,5 +1,5 @@
 # Anomalies Anonymous
-A description of your application. Background info is a nice touch.
+A description of your game. Background info is a nice touch.
 
 # Screenshot
 
