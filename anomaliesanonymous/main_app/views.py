@@ -203,14 +203,15 @@ def map(request):
                 "popup.setContent(`Report #${row[2]}`);"
                 "marker.bindPopup(popup);"
                 'return marker};')
-    plugins.HeatMap(sightings_list).add_to(base_map)
+    plugins.HeatMap(sightings_list, radius=11).add_to(base_map)
     folium.plugins.FastMarkerCluster(marker_list, callback=callback).add_to(base_map)
     base_map = base_map._repr_html_()
     return render(request, 'sightings/map.html', {
         'base_map': base_map
     })
     
-    
+# SEARCH VIEW
+# -------------------------------------------------
 # This view function takes a search query from the GET parameters and filters the Sighting objects based on the city or state fields.
 # If there's no query, it returns an empty queryset.
 def sightings_search(request):
