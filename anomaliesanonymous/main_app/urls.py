@@ -17,4 +17,6 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('sightings/map/', views.map, name='map'),
     path('search/', views.sightings_search, name='search'),
+    path('sightings/map/', views.map, name='map'),
+    path('search/', views.sightings_search, name='search'),
 ]

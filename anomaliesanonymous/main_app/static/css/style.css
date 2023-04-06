@@ -23,8 +23,8 @@ body {
 
 .header-scrolled {
     backdrop-filter: blur(25px);
-    background-color: rgb(54, 70, 110, .1);
-    transition: ease-in-out .3s;
+    background-color: rgb(54, 70, 110, .4);
+    transition: ease-in-out .5s;
 }
 
 a.nav-link {
@@ -121,6 +121,40 @@ img#account-logo {
     transform: translateY(-100vh) rotate(45deg);
 }
 
+img#account-logo {
+    padding-top: 3px;
+}
+
+.dropdown-menu {
+    left: -125px;
+    top: 45px;
+}
+
+.dropdown-item {
+    text-align: right;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+img#account-logo {
+    padding-top: 3px;
+}
+
+.dropdown-menu {
+    left: -125px;
+    top: 45px;
+}
+
+.dropdown-item {
+    text-align: right;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
 .grow {
     transition: all .4s ease-in-out;
 }
@@ -148,6 +182,15 @@ footer {
 
 textarea#id_comment {
     height: 100px;
-    background-color: rgb(224, 224, 224);
 }
 
+@keyframes getBrighter {
+    from {
+        filter: brightness(1);
+        opacity: 1;
+    }
+    to {
+        filter: brightness(3);
+        opacity: .75;
+    }
+}

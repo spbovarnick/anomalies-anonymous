@@ -179,6 +179,7 @@ def signup(request):
     }
     return render(request, 'registration/signup.html', context)
 
+
 # MAP VIEW
 # -------------------------------------------------
 def map(request):
