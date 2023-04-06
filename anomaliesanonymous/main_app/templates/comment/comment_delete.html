@@ -10,8 +10,8 @@
         <form action="" method="POST">
           {% csrf_token %}
           <div class="d-grid d-md-flex">
+            <a class="btn me-md-1 mb-1" href="{% url 'detail' sighting.id %}">Cancel</a>
             <input type="submit" class="btn btn-delete me-md-1 mb-1" value="Yes, delete">
-            <a class="btn mb-1" href="{% url 'detail' sighting.id %}">Cancel</a>
           </div>
         </form>
       </div>
@@ -22,5 +22,4 @@
 <div class="container d-flex justify-content-center">
   <img class="cow" src="/static/assets/cow.png">
 </div>
-
 {% endblock %}
