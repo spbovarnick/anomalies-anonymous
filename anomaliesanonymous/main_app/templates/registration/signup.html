@@ -10,7 +10,7 @@
             <p>{{ error_message }}</p>
             <form method="POST" action="{% url 'signup' %}" class="">
                 {% csrf_token %}
-                {{ form| crispy }}
+                {{ form|crispy }}
                 <input type="submit" class="btn mb-4" value="Sign Up">
             </form>
             <p class="mt-5">Already have an account? </p>

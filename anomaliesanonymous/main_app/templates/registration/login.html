@@ -9,7 +9,7 @@
             <h1 class="mb-5">Log In</h1>
             <form method="POST" action="{% url 'login' %}" class="mb-5">
                 {% csrf_token %}
-                {{ form| crispy }}
+                {{ form|crispy }}
                 <input type="hidden" name="next" value="{{ next }}">
                 <button type="submit" class="btn mb-4">Log In</button>
             </form>
