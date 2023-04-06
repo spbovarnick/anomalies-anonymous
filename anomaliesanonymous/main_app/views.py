@@ -211,7 +211,7 @@ def map(request):
     })
     
     
-# MAP VIEW
+# SEARCH VIEW
 # -------------------------------------------------
 def sightings_search(request):
     query = request.GET.get('q', '')
