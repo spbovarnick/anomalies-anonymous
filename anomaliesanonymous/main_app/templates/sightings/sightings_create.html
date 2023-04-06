@@ -7,12 +7,12 @@
     <div class="justify-content-center">
         <div class="col-lg-10 col-md-12 col-sm-12 mb-4 px-4" style="margin: 0 auto; max-width: 600px;">
             <h1 class="mb-5">Report A Sighting</h1>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.media }}
-                {{ form|crispy }}
-                <input type="submit" value="Submit" class="btn">
-            </form>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form|crispy }}
+                    <input type="submit" value="Submit" class="btn">
+                </form>
         </div>
     </div>
 </div>
