@@ -20,7 +20,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 # App modules
-from .models import Sighting, Comment, Photo
+from .models import Sighting, Comment, Photo, User
 from .forms import SightingForm, CommentForm, DeleteCommentForm
 
 
