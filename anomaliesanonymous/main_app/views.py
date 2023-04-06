@@ -205,11 +205,6 @@ def map(request):
                 'return marker};')
     plugins.HeatMap(sightings_list).add_to(base_map)
     folium.plugins.FastMarkerCluster(marker_list, callback=callback).add_to(base_map)
-    sightings = Sighting.objects.all()
-    sightings_list = Sighting.objects.values_list('latitude', 'longitude', 'id')
-    base_map = folium.Map(location=[37.0902, -95.7129], tiles='CartoDB Dark_Matter', zoom_start=4)
-    plugins.HeatMap(sightings_list).add_to(base_map)
-    folium.plugins.FastMarkerCluster(marker_list, icon_create_function=icon_create_function).add_to(base_map)
     base_map = base_map._repr_html_()
     return render(request, 'sightings/map.html', {
         'base_map': base_map
