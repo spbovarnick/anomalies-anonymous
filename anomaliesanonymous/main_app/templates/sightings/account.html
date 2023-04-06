@@ -8,15 +8,9 @@
 
         {% for sighting in sightings %}
         <div class="col-lg-6 col-md-12 col-sm-12">
-<<<<<<< HEAD
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 id="report-number" class="card-title mb-3">Report <em class="blue">#{{ sighting.id }}</em></h5>
-=======
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3"> Report #{{ sighting.id }}</h4>
->>>>>>> 0088eae (created map view, url path and template)
                     <p class="card-text">{{ sighting.datetime }}</p>
                     <p class="card-text">City: {{ sighting.city }}</p>
                     <p class="card-text">State: {{ sighting.state }}</p>
@@ -31,7 +25,6 @@
             </div>
         </div>
         {% empty %}
-<<<<<<< HEAD
         <div class="col-lg-12 col-md-12 col-sm-12">
             <p>You haven't reported any sightings.</p>
             <p><a class="btn" href="{% url 'sightings_create' %}">Report A Sighting</a></p>
@@ -44,12 +37,4 @@
     <img class="cow" src="/static/assets/cow.png">
 </div>
 
-=======
-        <p>You haven't reported any sightings.</p>
-        <p><a class="nav-link button" href="{% url 'sightings_create' %}">Report A Sighting</a></p>
-        {% endfor %}
-    </div>
-</div>
-
->>>>>>> 0088eae (created map view, url path and template)
 {% endblock %}

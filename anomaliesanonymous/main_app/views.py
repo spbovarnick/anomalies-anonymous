@@ -2,6 +2,9 @@
 import os
 import uuid
 import boto3
+import folium
+import geocoder
+from folium import plugins
 
 # Django modules
 from django.core.paginator import Paginator
@@ -177,21 +180,47 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
-# SEARCH VIEWS
-# -------------------------------------------------
-def sightings_search(request):
-    query = request.GET.get('q', '')
-    sightings = None # Empty queryset as default
-    if query:
-        sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query)).order_by('-datetime')
-    else:
-        sightings = Sighting.objects.none() # Empty queryset as default
-    return render(request, 'sightings/search.html', {
-        'sightings': sightings, 
-        'query': query
-    })
-
 # MAP VIEW
 # -------------------------------------------------
 def map(request):
-    return render(request, 'sightings/map.html')
+    user_loc = geocoder.ip('me').latlng
+    sightings = Sighting.objects.all()
+    sightings_list = Sighting.objects.values_list('latitude', 'longitude')
+    base_map = folium.Map(location=user_loc, tiles='CartoDB Dark_Matter', zoom_start=7)
+    marker_list = []
+    for sighting in sightings:
+        marker_list.append([sighting.latitude.__float__(), sighting.longitude.__float__(), sighting.id])
+    callback = ('function (row) {' 
+                'var marker = L.marker(new L.LatLng(row[0], row[1]), {color: "red"});'
+                'var icon = L.AwesomeMarkers.icon({'
+                "icon: 'bullseye',"
+                "iconColor: 'white',"
+                "markerColor: 'cadetblue',"
+                "prefix: 'fa',"
+                    '});'
+                'marker.setIcon(icon);'
+                "var popup = L.popup({maxWidth: '300'});"
+                "popup.setContent(`Report #${row[2]}`);"
+                "marker.bindPopup(popup);"
+                'return marker};')
+    plugins.HeatMap(sightings_list).add_to(base_map)
+    folium.plugins.FastMarkerCluster(marker_list, callback=callback).add_to(base_map)
+    base_map = base_map._repr_html_()
+    return render(request, 'sightings/map.html', {
+        'base_map': base_map
+    })
+    
+    
+# MAP VIEW
+# -------------------------------------------------
+def sightings_search(request):
+    query = request.GET.get('q', '')
+    # Empty querysets as default
+    sightings = None
+    if query:
+        sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query) | Q(id__icontains=query) | Q(description__icontains=query) | Q(datetime__icontains=query)).order_by('-datetime')
+        # If we want usernames to be searchable, uncomment next line
+        # sightings = User.objects.filter(Q(username__icontains=query))
+    else:
+        sightings = Sighting.objects.none() # Empty queryset as default
+    return render(request, 'sightings/search.html', {'sightings': sightings, 'query': query})

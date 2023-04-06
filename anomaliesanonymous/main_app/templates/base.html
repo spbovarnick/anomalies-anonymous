@@ -29,7 +29,7 @@
               <a class="nav-link" href="{% url 'index' %}">Sightings</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Map</a>
+              <a class="nav-link" href="{% url 'map' %}">Map</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">News</a>
@@ -57,16 +57,6 @@
                   <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                 </div>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
-                </a>
-                <div class="dropdown-menu" aria-labelledby="accountDropdown">
-                  <a class="dropdown-item" href="{% url 'account' %}">My Account</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
-                </div>
-              </li>
             {% else %}
               <li class="nav-item">
                 <a class="nav-link button" href="{% url 'login' %}">Report A Sighting</a>
@@ -79,17 +69,7 @@
                   <a class="dropdown-item" href="{% url 'account' %}">Log In</a>
                   <a class="dropdown-item" href="{% url 'signup' %}">Create Account</a>
                 </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
-                </a>
-                <div class="dropdown-menu" aria-labelledby="accountDropdown">
-                  <a class="dropdown-item" href="{% url 'account' %}">Sign In</a>
-                  <a class="dropdown-item" href="{% url 'signup' %}">Create Account</a>
-                </div>
-              </li>
-              
+              </li>        
             {% endif %}
           </ul>
         </div>

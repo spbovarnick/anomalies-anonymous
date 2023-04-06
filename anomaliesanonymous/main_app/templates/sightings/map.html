@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% block content %}
 
+
+{% block content %}
 <div class="container">
     <h1>Heat Map</h1>
-</div>
 
+    {{ base_map|safe  }}
+</div>
 {% endblock %}
