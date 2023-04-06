@@ -7,12 +7,4 @@
     {{ base_map|safe  }}
 </div>
 
-<script>
-    const iconCreateFunction = function(cluster) {
-    return L.divIcon({html: '<b>' + cluster.getChildCount() + '</b>',
-                      className: 'marker-cluster marker-cluster-small',
-                      iconSize: new L.Point(100, 20)});
-    }
-</script>
-
 {% endblock %}

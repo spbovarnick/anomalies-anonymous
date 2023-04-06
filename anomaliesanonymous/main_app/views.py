@@ -189,15 +189,21 @@ def map(request):
     marker_list = []
     for sighting in sightings:
         marker_list.append([sighting.latitude.__float__(), sighting.longitude.__float__(), sighting.id])
-    icon_create_function = '''
-    function(cluster) {
-    return L.divIcon({html: '<b>' + cluster.getChildCount() + '</b>',
-                      className: 'marker-cluster marker-cluster-small',
-                      iconSize: new L.Point(20, 20)});
-        }
-    '''
+    callback = ('function (row) {' 
+                'var marker = L.marker(new L.LatLng(row[0], row[1]), {color: "red"});'
+                'var icon = L.AwesomeMarkers.icon({'
+                "icon: 'bullseye',"
+                "iconColor: 'white',"
+                "markerColor: 'cadetblue',"
+                "prefix: 'fa',"
+                    '});'
+                'marker.setIcon(icon);'
+                "var popup = L.popup({maxWidth: '300'});"
+                "popup.setContent(`Report #${row[2]}`);"
+                "marker.bindPopup(popup);"
+                'return marker};')
     plugins.HeatMap(sightings_list).add_to(base_map)
-    folium.plugins.FastMarkerCluster(marker_list, icon_create_function=icon_create_function).add_to(base_map)
+    folium.plugins.FastMarkerCluster(marker_list, callback=callback).add_to(base_map)
     base_map = base_map._repr_html_()
     return render(request, 'sightings/map.html', {
         'base_map': base_map
