@@ -16,14 +16,14 @@ html {
 }
 
 body {
-    padding: 10vh 0;
+    padding-top: 10vh;
     background-color: transparent;
     color: white;
 }
 
 .header-scrolled {
     backdrop-filter: blur(25px);
-    background-color: rgb(54, 70, 110, .1);
+    background-color: rgb(54, 70, 110, .4);
     transition: ease-in-out .3s;
 }
 
@@ -32,33 +32,19 @@ a.nav-link {
     padding: 5px;
 }
 
-button.btn {
-    font-weight: 500;
-}
-
-a.btn {
-    font-weight: 500;
-}
-
-input.btn {
-    font-weight: 500;
-}
-
 .btn {
-    background-color: white;
-    color: rgb(54, 70, 110);
+    background-color: rgb(54, 70, 110);
+    color: white;
     border: none;
-    transition: .25s;
 }
 
 .btn:hover {
-    background-color: rgb(197, 197, 197);
+    background-color: rgb(70, 93, 149);
     color: white;
 }
 
 .btn-delete {
     background-color: rgb(214, 48, 48);
-    color: white;
 }
 
 .btn-delete:hover {
@@ -74,19 +60,10 @@ input.btn {
     transform: scale(1.025);
 }
 
-.card {
-    background-color: #455c80;
-    border: none;
-    color: white
-}
 
 a.navbar-brand {
     color: rgb(24, 39, 77);
     font-weight: 600;
-}
-
-a.nav-link.navbar-brand {
-    margin-right: 30px;
 }
 
 a.navbar-brand:hover {
@@ -96,15 +73,15 @@ a.navbar-brand:hover {
 a.nav-link.button {
     background-color: white;
     color: rgb(51, 68, 94);
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 5px;
     margin: 3px 7px 0 0;
+    opacity: .7;
     transition: .4s;
 }
 
 a.nav-link.button:hover {
-    background-color: rgb(197, 197, 197);
-    color: white;
+    opacity: 1;
 }
 
 img#account-logo {
@@ -143,21 +120,13 @@ img#account-logo {
     transform: scale(1.05);
 }
 
-.blue {
-    color: rgb(120, 178, 236);
-}
-
 #report-number {
     font-size: 2rem;
     font-weight: 700;
 }
 
-textarea#id_comment {
-    height: 100px;
-}
-
 p.card-text.bold {
-    color: rgb(120, 178, 236);
+    color: rgb(69, 69, 125);
     font-weight: 700;
     font-style: italic;
     font-size: 1.15rem;
@@ -167,3 +136,4 @@ footer {
     color: rgb(169, 169, 169);
     font-size: 12px;
 }
+
