@@ -207,6 +207,10 @@ footer {
     font-size: 12px;
 }
 
+textarea#id_comment {
+    height: 100px;
+}
+
 @keyframes getBrighter {
     from {
         filter: brightness(1);
