@@ -9,7 +9,7 @@
             <h1 class="mb-5">Report A Sighting</h1>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.media }}
+                    <!-- {{ form.media }} -->
                     {{ form|crispy }}
                     <input type="submit" value="Submit" class="btn">
                 </form>
