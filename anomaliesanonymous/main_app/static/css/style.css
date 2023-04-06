@@ -66,6 +66,12 @@ input.btn {
     background-color: rgb(240, 77, 77);
 }
 
+.card {
+    background-color: #455c80;
+    border: none;
+    color: white
+}
+
 .grow {
     border-radius: 10px;
     transition: all .4s ease-in-out;
