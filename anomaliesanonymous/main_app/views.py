@@ -94,7 +94,7 @@ def sightings_update(request, sighting_id):
         return render(request, 'sightings/detail.html', {
         'sighting': sighting
     })
-    context["form"] = form
+    context = {"form": form, 'sighting': sighting}
     return render(request, 'sightings/sightings_create.html', context)
 
 class SightingDelete(LoginRequiredMixin, DeleteView):

@@ -6,7 +6,11 @@
 <div class="container">
     <div class="justify-content-center">
         <div class="col-lg-10 col-md-12 col-sm-12 mb-4 px-4" style="margin: 0 auto; max-width: 600px;">
+            {% if user.id == sighting.user.id %}
+            <h1 class="mb-5">Update Sighting #{{ sighting.id }}</h1>
+            {% else %}
             <h1 class="mb-5">Report A Sighting</h1>
+            {% endif %}
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.media }}
