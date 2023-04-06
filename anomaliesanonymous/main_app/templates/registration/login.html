@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container">
@@ -22,16 +24,6 @@
 </div>
 <div class="container d-flex justify-content-center">
     <img class="cow" src="/static/assets/cow.png">
-
-    <h1 class="mb-5">Log In</h1>
-
-    <form method="POST" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ form }}
-        <input type="hidden" name="next" value="{{ next }}">
-        <button type="submit" class="btn">Log In</button>
-    </form>
-    <p>
-        Don't have an account yet? <a class="nav-link" href="{% url 'signup' %}">Create Account</a>
-    </p>
 </div>
+
+{% endblock %}

@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container">
@@ -15,12 +17,8 @@
     </div>
 </div>
 
-
-    <p>{{ error_message }}</p>
-
-    <form method="POST" action="{% url 'signup' %}">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" class="btn" value="Sign Up">
-    </form>
+<div class="container d-flex justify-content-center">
+    <img class="cow" src="/static/assets/cow.png">
 </div>
+
+{% endblock %}
