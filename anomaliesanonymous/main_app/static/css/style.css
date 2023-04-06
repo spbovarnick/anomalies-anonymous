@@ -54,7 +54,7 @@ a.nav-link {
 }
 
 .card {
-    background-color: #455c80;
+    background-color: rgb(69, 92, 128);
     border: none;
     color: white
 }
@@ -142,9 +142,14 @@ img#account-logo {
     padding-top: 3px;
 }
 
+a.dropdown-item.disabled {
+    color:rgb(24, 39, 77)
+}
+
 .dropdown-menu {
-    left: -125px;
-    top: 45px;
+    position: relative;
+    right: 0;
+    left: auto;
 }
 
 .dropdown-item {
@@ -183,6 +188,58 @@ footer {
 textarea#id_comment {
     height: 100px;
 }
+
+.blue {
+    color: rgb(107, 172, 237);
+}
+
+div.form-text {
+    display: none;
+}
+
+#mobile-account {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse.collapse.show {
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+    }
+    
+    a.nav-link.navbar-brand {
+        display: none;
+    }
+
+    #mobile-account {
+        display: inline;
+    }
+
+    a.nav-link.button {
+        display: none;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(53, 71, 100, 0.808);
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .navbar-nav li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    button.navbar-toggler {
+        border: none;
+    }
+
+    span.navbar-toggler {
+        border: none;
+        padding: 0;
+    }
+}
+
 
 @keyframes getBrighter {
     from {
