@@ -110,7 +110,7 @@ class Sighting(models.Model):
             return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.shape} at {self.latitude}, {self.longitude} on {self.datetime}"
+        return f"Report #{self.id} {self.shape} at {self.latitude}, {self.longitude} on {self.datetime}"
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'sighting_id': self.id})
