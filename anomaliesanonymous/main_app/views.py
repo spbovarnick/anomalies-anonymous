@@ -20,7 +20,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 # App modules
-from .models import Sighting, Comment, Photo
+from .models import Sighting, Comment, Photo, User
 from .forms import SightingForm, CommentForm, DeleteCommentForm
 
 
@@ -214,9 +214,12 @@ def map(request):
 # If there's no query, it returns an empty queryset.
 def sightings_search(request):
     query = request.GET.get('q', '')
-    sightings = None # Empty queryset as default
+    # Empty querysets as default
+    sightings = None
     if query:
-        sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query)).order_by('-datetime')
+        sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query) | Q(id__icontains=query) | Q(description__icontains=query) | Q(datetime__icontains=query)).order_by('-datetime')
+        # If we want usernames to be searchable, uncomment next line
+        # sightings = User.objects.filter(Q(username__icontains=query))
     else:
         sightings = Sighting.objects.none() # Empty queryset as default
     return render(request, 'sightings/search.html', {'sightings': sightings, 'query': query})

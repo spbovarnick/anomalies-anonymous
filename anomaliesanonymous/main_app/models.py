@@ -100,6 +100,9 @@ class Sighting(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # cascade method deletes all sightings if user is deleted
 
     def save(self, *args, **kwargs):
+        # if we decide we want full state and shape names to be accessible to search query, uncomment next 2 lines
+        # self.state = self.get_state_display()
+        # self.shape = self.get_shape_display()
         if self.latitude == None and self.longitude == None:
             self.place = f'{self.city}, {self.state}, United States'
             self.latitude = geocoder.osm(self.place).lat
