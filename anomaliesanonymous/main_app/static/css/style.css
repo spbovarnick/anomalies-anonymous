@@ -33,13 +33,9 @@ a.nav-link {
 }
 
 .btn {
-    color: rgb(51, 68, 94);
-    border: none;
-    transition: .25s;
-    font-weight: 500;
     background-color: rgb(54, 70, 110);
+    color: white;
     border: none;
-
 }
 
 .btn:hover {
@@ -110,12 +106,10 @@ img#account-logo {
     bottom: 30px;
     z-index: -50;
     transition: all 8s ease-in;
-    opacity: 1;
 }
 
 .cow:hover {
     transform: translateY(-100vh) rotate(45deg);
-    animation: getBrighter 8s ease-in-out;
 }
 
 .grow {
@@ -131,15 +125,6 @@ img#account-logo {
     font-weight: 700;
 }
 
-textarea#id_comment {
-    height: 100px;
-}
-
-/* Deletes sign up instructions
-div.form-text {
-    display: none;
-} */
-
 p.card-text.bold {
     color: rgb(69, 69, 125);
     font-weight: 700;
@@ -152,14 +137,3 @@ footer {
     font-size: 12px;
 }
 
-
-@keyframes getBrighter {
-    from {
-        filter: brightness(1);
-        opacity: 1;
-    }
-    to {
-        filter: brightness(3);
-        opacity: .75;
-    }
-}
