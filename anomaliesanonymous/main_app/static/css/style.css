@@ -23,13 +23,18 @@ body {
 
 .header-scrolled {
     backdrop-filter: blur(25px);
+<<<<<<< HEAD
     background-color: rgb(54, 70, 110, .1);
+=======
+    background-color: rgb(54, 70, 110, .4);
+>>>>>>> 0088eae (created map view, url path and template)
     transition: ease-in-out .3s;
 }
 
 a.nav-link {
     color: white;
     padding: 5px;
+<<<<<<< HEAD
 }
 
 button.btn {
@@ -42,6 +47,8 @@ a.btn {
 
 input.btn {
     font-weight: 500;
+=======
+>>>>>>> 0088eae (created map view, url path and template)
 }
 
 .btn {
@@ -97,9 +104,13 @@ a.navbar-brand:hover {
 a.nav-link.button {
     background-color: white;
     color: rgb(51, 68, 94);
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 5px;
     margin: 3px 7px 0 0;
+<<<<<<< HEAD
+=======
+    opacity: .7;
+>>>>>>> 0088eae (created map view, url path and template)
     transition: .4s;
 }
 
@@ -133,9 +144,38 @@ img#account-logo {
     opacity: 1;
 }
 
+<<<<<<< HEAD
 .cow:hover {
     transform: translateY(-100vh) rotate(45deg);
     animation: getBrighter 8s ease-in-out;
+=======
+img#account-logo {
+    padding-top: 3px;
+}
+
+.dropdown-menu {
+    left: -125px;
+    top: 45px;
+}
+
+.dropdown-item {
+    text-align: right;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.cow {
+    position: absolute;
+    bottom: 30px;
+    z-index: -50;
+    transition: all 8s ease-in;
+}
+
+.cow:hover {
+    transform: translateY(-100vh) rotate(45deg);
+>>>>>>> 0088eae (created map view, url path and template)
 }
 
 .grow {
@@ -146,10 +186,13 @@ img#account-logo {
     transform: scale(1.05);
 }
 
+<<<<<<< HEAD
 .blue {
     color: rgb(120, 178, 236);
 }
 
+=======
+>>>>>>> 0088eae (created map view, url path and template)
 #report-number {
     font-size: 2rem;
     font-weight: 700;
@@ -174,6 +217,7 @@ p.card-text.bold {
 footer {
     color: rgb(169, 169, 169);
     font-size: 12px;
+<<<<<<< HEAD
 }
 
 @keyframes getBrighter {
@@ -185,4 +229,6 @@ footer {
         filter: brightness(3);
         opacity: .75;
     }
+=======
+>>>>>>> 0088eae (created map view, url path and template)
 }

@@ -11,10 +11,11 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <header>
-    <nav class="navbar header autohide fixed-top navbar-expand-md navbar-dark">
+    <nav class="navbar header autohide header autohide fixed-top navbar-expand-md navbar-dark">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -44,7 +45,17 @@
           <ul class="navbar-nav me mb-2 mb-lg-0">
             {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link button" href="{% url 'sightings_create' %}">Report A Sighting</a>
+                <a class="nav-link button" href="{% url 'sightings_create' %}">Report Sighting</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                  <a class="dropdown-item" href="{% url 'account' %}">My Account</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                </div>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,6 +80,16 @@
                   <a class="dropdown-item" href="{% url 'signup' %}">Create Account</a>
                 </div>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img id="account-logo" src="/static/assets/account-cowboy-hat.png">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="accountDropdown">
+                  <a class="dropdown-item" href="{% url 'account' %}">Sign In</a>
+                  <a class="dropdown-item" href="{% url 'signup' %}">Create Account</a>
+                </div>
+              </li>
+              
             {% endif %}
           </ul>
         </div>

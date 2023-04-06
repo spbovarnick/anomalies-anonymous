@@ -190,3 +190,8 @@ def sightings_search(request):
         'sightings': sightings, 
         'query': query
     })
+
+# MAP VIEW
+# -------------------------------------------------
+def map(request):
+    return render(request, 'sightings/map.html')
