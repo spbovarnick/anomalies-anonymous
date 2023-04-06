@@ -4,20 +4,7 @@
 
 {% block content %}
 <div class="container">
-    <div class="justify-content-center">
-        <div class="col-lg-10 col-md-12 col-sm-12 mb-4 px-4" style="margin: 0 auto; max-width: 600px;">
-            <h1 class="mb-5">Create An Account</h1>
-            <p>{{ error_message }}</p>
-            <form method="POST" action="{% url 'signup' %}" class="">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input type="submit" class="btn mb-4" value="Sign Up">
-            </form>
-            <p class="mt-5">Already have an account? </p>
-            <a class="btn" href="{% url 'login' %}">Log In</a>
-        </div>
-    </div>
-</div>
+    <h1 class="mb-5">Create An Account</h1>
 
 <div class="container d-flex justify-content-center">
     <img class="cow" src="/static/assets/cow.png">
