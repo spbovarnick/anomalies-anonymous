@@ -26,7 +26,7 @@
         </form>
       </div>
     </div>
-    </div>
+
     <div class="row" id="sightings-row">
       {% for sighting in sightings %}
       <div class="col-md-6 col-lg-4 mb-4">
@@ -42,28 +42,32 @@
                 <span class="position-absolute bottom-0 end-0 m-3"><a href="#"><img src="/static/assets/arrow-down-bold.png"></a></span>
             </div>
         </div>
-    </div>
+      </div>
       {% endfor %}
-  </div>
+    </div>
 
-<nav>
-  <ul class="pagination">
-  {% if sightings.has_previous %}
-    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{ sightings.previous_page_number }}">Previous</a></li>
+    <div class="d-flex">
+      <nav class="mb-5 mx-auto">
+        <ul class="pagination">
+        {% if sightings.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ sightings.previous_page_number }}">Previous</a></li>
+      
+        {% endif %}
+      
+        <li class="page-item">
+          <a class="page-link">
+            Page {{ sightings.number }} of {{ sightings.paginator.num_pages }}
+          </a>
+        </li>
+      
+        {% if sightings.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ sightings.next_page_number }}">Next</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ sightings.paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+        </ul>
+      </nav>
+      {% endblock %}
+    </div>
+</div>
 
-  {% endif %}
-
-  <li class="page-item">
-    <a class="page-link">
-      Page {{ sightings.number }} of {{ sightings.paginator.num_pages }}
-    </a>
-  </li>
-
-  {% if sightings.has_next %}
-    <li class="page-item"><a class="page-link" href="?page={{ sightings.next_page_number }}">Next</a></li>
-    <li class="page-item"><a class="page-link" href="?page={{ sightings.paginator.num_pages }}">Last &raquo;</a></li>
-  {% endif %}
-  </ul>
-</nav>
-{% endblock %}
