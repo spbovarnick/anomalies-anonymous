@@ -202,6 +202,29 @@ div.form-text {
     display: none;
 }
 
+
+.dark-blue {
+    color: rgb(54, 70, 110);
+    font-weight: 500;
+}
+
+.dark-blue:hover {
+    color: rgb(128, 145, 186);
+    font-weight: 500;
+}
+
+.sort-btn {
+    color: white;
+    background-color: rgb(162, 160, 160);
+    border-left: 2px solid grey;
+}
+
+.sort-btn:hover {
+    color: white;
+    background-color: rgb(107, 172, 237);
+    border-left: 2px solid grey;
+}
+
 #mobile-account {
     display: none;
 }

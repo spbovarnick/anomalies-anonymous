@@ -16,13 +16,13 @@
       </div>
       <div class="col-md-6 col-lg-4 mb-6">
         <form action="{% url 'index' %}" method="GET" class="input-group rounded mb-3" style="max-width: 375px;">
-            <select class="form-control rounded" aria-label="" aria-describedby="-addon" name="sort">
+            <select class="form-control rounded-left" aria-label="" aria-describedby="-addon" name="sort">
               <option value="most-recent">Most Recent First</option>
               <option value="oldest">Oldest First</option>
               <option value="newest-posted">Newest Reports</option>
               <option value="oldest-posted">Oldest Reports</option>
             </select>
-            <button class="btn" type="submit">Sort</button>
+            <button class="btn sort-btn" type="submit">Sort</button>
         </form>
       </div>
     </div>
@@ -50,20 +50,20 @@
       <nav class="mb-5 mx-auto">
         <ul class="pagination">
         {% if sightings.has_previous %}
-          <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-          <li class="page-item"><a class="page-link" href="?page={{ sightings.previous_page_number }}">Previous</a></li>
+          <li class="page-item"><a class="page-link dark-blue" href="?page=1">&laquo; First</a></li>
+          <li class="page-item"><a class="page-link dark-blue" href="?page={{ sightings.previous_page_number }}">Previous</a></li>
       
         {% endif %}
       
         <li class="page-item">
-          <a class="page-link">
+          <a class="page-link dark-blue">
             Page {{ sightings.number }} of {{ sightings.paginator.num_pages }}
           </a>
         </li>
       
         {% if sightings.has_next %}
-          <li class="page-item"><a class="page-link" href="?page={{ sightings.next_page_number }}">Next</a></li>
-          <li class="page-item"><a class="page-link" href="?page={{ sightings.paginator.num_pages }}">Last &raquo;</a></li>
+          <li class="page-item"><a class="page-link dark-blue" href="?page={{ sightings.next_page_number }}">Next</a></li>
+          <li class="page-item"><a class="page-link dark-blue" href="?page={{ sightings.paginator.num_pages }}">Last &raquo;</a></li>
         {% endif %}
         </ul>
       </nav>
