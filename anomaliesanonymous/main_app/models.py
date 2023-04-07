@@ -97,7 +97,7 @@ class Sighting(models.Model):
     latitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, null=True)
     description = models.TextField(max_length=300)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # cascade method deletes all sightings if user is deleted
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def save(self, *args, **kwargs):
         # if we decide we want full state and shape names to be accessible to search query, uncomment next 2 lines

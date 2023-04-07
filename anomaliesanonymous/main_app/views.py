@@ -35,9 +35,20 @@ def about(request):
 # SIGHTINGS VIEWS
 # -------------------------------------------------
 def sightings_index(request):
-    sightings = Sighting.objects.all().order_by('-datetime')
+    sorts = ['most-recent', 'oldest', 'newest-posted', 'oldest-posted']
+    sort = request.GET.get('sort', sorts[0])
+    sightings = None
+    if sort == sorts[0]:
+        sightings = Sighting.objects.all().order_by('-datetime')
+    elif sort == sorts[1]:
+        sightings = Sighting.objects.all().order_by('datetime')
+    elif sort == sorts[2]:
+        sightings = Sighting.objects.all().order_by('-date_posted')
+    elif sort == sorts[3]:
+        sightings = Sighting.objects.all().order_by('date_posted')
+
     p = Paginator(sightings, 60)
-    page = request.GET.get('page')
+    page = request.GET.get('page', )
     sightings = p.get_page(page)
 
     return render(request, 'sightings/index.html', {
@@ -214,7 +225,7 @@ def sightings_search(request):
     if query:
         sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query) | Q(id__icontains=query) | Q(description__icontains=query) | Q(datetime__icontains=query)).order_by('-datetime')
         # If we want usernames to be searchable, uncomment next line
-        # sightings = User.objects.filter(Q(username__icontains=query))
+        sightings = User.objects.filter(Q(username__icontains=query))
     else:
         sightings = Sighting.objects.none() # Empty queryset as default
     return render(request, 'sightings/search.html', {'sightings': sightings, 'query': query})
