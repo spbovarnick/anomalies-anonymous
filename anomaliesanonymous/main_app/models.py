@@ -101,13 +101,17 @@ class Sighting(models.Model):
 
     def save(self, *args, **kwargs):
         # if we decide we want full state and shape names to be accessible to search query, uncomment next 2 lines
-        self.state = self.get_state_display()
-        self.shape = self.get_shape_display()
-        if self.latitude == None and self.longitude == None:
+        # self.state = self.get_state_display()
+        # self.shape = self.get_shape_display()
+        if self.latitude == None: 
             self.place = f'{self.city}, {self.state}, United States'
             self.latitude = geocoder.osm(self.place).lat
+
+        if self.longitude == None:
+            self.place = f'{self.city}, {self.state}, United States'
             self.longitude = geocoder.osm(self.place).lng
-            return super().save(*args, **kwargs)
+            
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Report #{self.id} {self.shape} at {self.latitude}, {self.longitude} on {self.datetime}"
