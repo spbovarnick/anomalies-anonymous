@@ -63,21 +63,31 @@
     </div>
     <div class="col-12 mb-4">
       <h2 class="card-title mb-3">Comments</h2>
-
-     <div id="comment-error" class="alert alert-danger" style="display: none;"></div>
+      
+      {% if user.is_authenticated %}
+      <div id="comment-error" class="alert alert-danger" style="display: none;"></div> 
+      <form id="comment-form" action="{% url 'add_comment' sighting.id %}" method="POST">
           {% csrf_token %}
         <div class="form-group">
           {{ comment_form|crispy }}
         </div>
         <button type="submit" class="btn btn-primary mb-4">Add Comment</button>
       </form>
+      {% else %}
+      <div class="card mb-2">
+        <div class="card-body">
+          <p class="card-text">Please <a class="blue" href="{% url 'login' %}">log in</a> or <a href="{% url 'signup' %}" class="blue">create an account</a> to leave a comment.</p>
+        </div>
+      </div>
+      {% endif %}
+
 
       {% if sighting.comment_set.all.count %}
         {% for comment in sighting.comment_set.all %}
           <div class="card mb-3">
             <div class="card-body">
-              <p class="card-text">Posted: {{ comment.date_posted }}</p>
-              <p class="card-text">Comment: {{ comment.comment }}</p>
+              <p class="card-text small">Posted: <em class="small grey">{{ comment.date_posted }}</em> by <em class="small grey">{{ comment.user.username }}</em></p>
+              <p class="card-text">{{ comment.comment }}</p>
               {% if user.id == comment.user.id %}
                 <a href="{% url 'edit_comment' sighting.id comment.id %}" class="btn">Edit</a>
                 <a href="{% url 'delete_comment' sighting.id comment.id %}" class="btn btn-delete">Delete</a>
