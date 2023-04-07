@@ -57,6 +57,7 @@ def sightings_index(request):
 
 def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
+    filer = sighting.user
     sighting.user_id = request.user
     comment_form = CommentForm()
     lat_lng = [sighting.latitude.__float__(), sighting.longitude.__float__()]
@@ -67,6 +68,7 @@ def sightings_detail(request, sighting_id):
         'sighting': sighting,
         'comment_form': comment_form,
         'detail_map': detail_map,
+        'filer' : filer,
     })
 
 @login_required
