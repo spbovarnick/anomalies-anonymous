@@ -3,7 +3,6 @@
 # durationwidget: https://github.com/devangpadhiyar/django-durationwidget
 
 from django_flatpickr.widgets import DateTimePickerInput
-from durationwidget.widgets import TimeDurationWidget
 from django.forms import ModelForm
 from django.forms.widgets import TextInput
 

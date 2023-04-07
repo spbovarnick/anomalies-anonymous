@@ -4,13 +4,10 @@
 from __future__ import print_function
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-
+import os
 import django
 django.setup()
 from main_app.models import Sighting
-# from django.apps import apps
-
-# SightingModel = apps.get_model('main_app', 'Sighting')
 
 SERVICE_ACCOUNT_FILE = 'google-keys.json'
 
