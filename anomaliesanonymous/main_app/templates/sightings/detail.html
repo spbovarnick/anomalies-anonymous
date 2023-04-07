@@ -64,8 +64,10 @@
             <div class="card-body">
               <p class="card-text">Posted: {{ comment.date_posted }}</p>
               <p class="card-text">Comment: {{ comment.comment }}</p>
-              <a href="{% url 'edit_comment' sighting.id comment.id %}" class="btn">Edit</a>
-              <a href="{% url 'delete_comment' sighting.id comment.id %}" class="btn btn-delete">Delete</a>
+              {% if user.id == comment.user.id %}
+                <a href="{% url 'edit_comment' sighting.id comment.id %}" class="btn">Edit</a>
+                <a href="{% url 'delete_comment' sighting.id comment.id %}" class="btn btn-delete">Delete</a>
+              {% endif %}
             </div>
           </div>
         {% endfor %}
