@@ -35,14 +35,29 @@ def about(request):
 # SIGHTINGS VIEWS
 # -------------------------------------------------
 def sightings_index(request):
-    page_number = request.GET.get('page', 1)
-    per_page = 36  # Change this to the number of cards you want to load per request
-    sightings = Sighting.objects.all().order_by('-datetime')
-    paginator = Paginator(sightings, per_page)
-    sightings = paginator.get_page(page_number)
+    # page_number = request.GET.get('page', 1)
+    # per_page = 36  # Change this to the number of cards you want to load per request
+    # sightings = Sighting.objects.all().order_by('-datetime')
+    # paginator = Paginator(sightings, per_page)
+    # sightings = paginator.get_page(page_number)
+    sorts = ['most-recent', 'oldest', 'newest-posted', 'oldest-posted']
+    if request.GET.get(sorts[0]):
+        sightings = Sighting.objects.all().order_by('-datetime')
+    elif request.GET.get(sorts[1]):
+        sightings = Sighting.objects.all().order_by('datetime')
+    elif request.GET.get(sorts[2]):
+        sightings = Sighting.objects.all().order_by('-date_posted')
+    elif request.GET.get(sorts[3]):
+        sightings = Sighting.objects.all().order_by('date_posted')
+
+    p = Paginator(sightings, 60)
+    page = request.GET.get('page')
+    # sightings_pages = p.get_page(page)
+    sightings = p.get_page(page)
 
     return render(request, 'sightings/index.html', {
-        'sightings': sightings
+        'sightings': sightings,
+        # 'sightings_pages': sightings_pages
     })
 
 def sightings_detail(request, sighting_id):
@@ -59,15 +74,15 @@ def sightings_detail(request, sighting_id):
         'detail_map': detail_map,
     })
 
-def fetch_sightings(request):
-    page_number = request.GET.get('page', 1)
-    per_page = 100  # Change this to the number of cards you want to load per request
-    all_sightings = Sighting.objects.all().order_by('-datetime')
-    paginator = Paginator(all_sightings, per_page)
-    sightings = paginator.get_page(page_number)
+# def fetch_sightings(request):
+#     page_number = request.GET.get('page', 1)
+#     per_page = 100  # Change this to the number of cards you want to load per request
+#     all_sightings = Sighting.objects.all().order_by('-datetime')
+#     paginator = Paginator(all_sightings, per_page)
+#     sightings = paginator.get_page(page_number)
 
-    data = serializers.serialize('json', sightings) # Convert the data to JSON
-    return JsonResponse({'data': data, 'has_next': sightings.has_next()})
+#     data = serializers.serialize('json', sightings) # Convert the data to JSON
+#     return JsonResponse({'data': data, 'has_next': sightings.has_next()})
 
 @login_required
 def account(request):

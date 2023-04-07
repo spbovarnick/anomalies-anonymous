@@ -5,13 +5,27 @@
 <div class="container">
 
   <h1 class="mb-5">Recent Sightings</h1>
-    <div class="col-md-6 col-lg-4 mb-6"></div>
-    <form action="{% url 'search' %}" method="GET" class="input-group rounded mb-3" style="max-width: 375px;">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="q">
-        <span>
-          <button class="btn btn-search" style="background-color: transparent;" type="submit"><img src="/static/assets/search.png"></button>
-        </span>
-    </form>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mb-6">
+        <form action="{% url 'search' %}" method="GET" class="input-group rounded mb-3" style="max-width: 375px;">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="q">
+            <span>
+              <button class="btn btn-search" style="background-color: transparent;" type="submit"><img src="/static/assets/search.png"></button>
+            </span>
+        </form>
+      </div>
+      <div class="col-md-6 col-lg-4 mb-6">
+        <form action="{% url 'index' %}" method="GET" class="" style="max-width: 375px;">
+          <select name="sort">
+            <option value="newest" selected>Newest Sightings</option>
+            <option value="oldest">Oldest Sightings</option>
+            <option value="newest-posted">Newest Posted</option>
+            <option value="oldest-posted">Oldest Posted</option>
+          </select>
+          <button type="submit" class="btn">Sort</button>
+        </form>
+      </div>
+    </div>
     <div class="row" id="sightings-row">
       {% for sighting in sightings %}
       <div class="col-md-6 col-lg-4 mb-4">
@@ -30,9 +44,28 @@
     </div>
       {% endfor %}
   </div>
-</div>
 
-<script>
+<nav>
+  <ul class="pagination">
+  {% if sightings.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ sightings.previous_page_number }}">Previous</a></li>
+
+  {% endif %}
+
+  <li class="page-item">
+    <a class="page-link">
+      Page {{ sightings.number }} of {{ sightings.paginator.num_pages }}
+    </a>
+  </li>
+
+  {% if sightings.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ sightings.next_page_number }}">Next</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ sightings.paginator.num_pages }}">Last &raquo;</a></li>
+  {% endif %}
+  </ul>
+</nav>
+<!-- <script>
   let page = 1;
   let isLoading = false;
 
@@ -85,5 +118,5 @@
       loadMoreData();
     }
   };
-</script>
+</script> -->
 {% endblock %}
