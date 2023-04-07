@@ -14,17 +14,6 @@
             </span>
         </form>
       </div>
-      <div class="col-md-6 col-lg-4 mb-6">
-        <form action="{% url 'index' %}" method="GET" class="" style="max-width: 375px;">
-          <select name="sort">
-            <option value="most-recent" selected>Newest Sightings</option>
-            <option value="oldest">Oldest Sightings</option>
-            <option value="newest-posted">Newest Posted</option>
-            <option value="oldest-posted">Oldest Posted</option>
-          </select>
-          <button type="submit" class="btn">Sort</button>
-        </form>
-      </div>
     </div>
     <div class="row" id="sightings-row">
       {% for sighting in sightings %}
