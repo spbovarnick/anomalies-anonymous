@@ -17,7 +17,9 @@
             <p class="card-text bold mb-2">WHERE</p>
             <p class="card-text mb-2">{{ sighting.city }}, {{ sighting.state }}</p>
             <p class="card-text mb-4">{{ sighting.latitude }}° | {{ sighting.longitude }}°</p>
-            <p class="card-text mb-4">(Would be cool to put a little screenshot of google map coordinates here)</p>
+            <div width="300px">
+              {{ detail_map|safe }}
+            </div>
             <p class="card-text bold mb-2">WHAT</p>
             <p class="card-text mb-2"><em>Shape:</em> {{ sighting.get_shape_display.capitalize }}</p>
             <p class="card-text">{{ sighting.description }}</p>

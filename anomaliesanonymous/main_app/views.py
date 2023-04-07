@@ -49,9 +49,14 @@ def sightings_detail(request, sighting_id):
     sighting = Sighting.objects.get(id=sighting_id)
     sighting.user_id = request.user
     comment_form = CommentForm()
+    lat_lng = [sighting.latitude.__float__(), sighting.longitude.__float__()]
+    detail_map = folium.Map(location=lat_lng, zoom_start=12, tiles='CartoDB Dark_Matter')
+    folium.Marker(lat_lng, popup=f"<b>Report #{sighting.id}<b>", icon=folium.Icon(color="cadetblue", icon="bullseye", prefix="fa")).add_to(detail_map)
+    detail_map = detail_map._repr_html_()
     return render(request, 'sightings/detail.html', {
         'sighting': sighting,
         'comment_form': comment_form,
+        'detail_map': detail_map,
     })
 
 def fetch_sightings(request):
