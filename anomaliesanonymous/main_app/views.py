@@ -225,7 +225,7 @@ def sightings_search(request):
     if query:
         sightings = Sighting.objects.filter(Q(city__icontains=query) | Q(state__icontains=query) | Q(id__icontains=query) | Q(description__icontains=query) | Q(datetime__icontains=query)).order_by('-datetime')
         # If we want usernames to be searchable, uncomment next line
-        # sightings = User.objects.filter(Q(username__icontains=query))
+        sightings = User.objects.filter(Q(username__icontains=query))
     else:
         sightings = Sighting.objects.none() # Empty queryset as default
     return render(request, 'sightings/search.html', {'sightings': sightings, 'query': query})
