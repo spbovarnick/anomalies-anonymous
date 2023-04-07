@@ -35,13 +35,10 @@ def about(request):
 # SIGHTINGS VIEWS
 # -------------------------------------------------
 def sightings_index(request):
-    # page_number = request.GET.get('page', 1)
-    # per_page = 36  # Change this to the number of cards you want to load per request
-    # sightings = Sighting.objects.all().order_by('-datetime')
-    # paginator = Paginator(sightings, per_page)
-    # sightings = paginator.get_page(page_number)
     sorts = ['most-recent', 'oldest', 'newest-posted', 'oldest-posted']
-    if request.GET.get(sorts[0]):
+    sort = request.GET.get('sort', sorts)
+    sightings = None
+    if sort:
         sightings = Sighting.objects.all().order_by('-datetime')
     elif request.GET.get(sorts[1]):
         sightings = Sighting.objects.all().order_by('datetime')
