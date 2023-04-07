@@ -194,6 +194,10 @@ textarea#id_comment {
     color: rgb(107, 172, 237);
 }
 
+.small.grey {
+    color: rgb(197, 197, 197);
+}
+
 div.form-text {
     display: none;
 }

@@ -10,10 +10,15 @@
       <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
         <div class="card">
           <div class="card-body">
-            <h5 id="report-number" class="card-title mb-3">Report <em class="blue">#{{ sighting.id }}</em></h5>
-            <p class="card-text bold mb-2">WHEN</p>
+            <h5 id="report-number" class="card-title">Report <em class="blue">#{{ sighting.id }}</em></h5>
+            {% if filer.username %}
+              <p class="card-text small grey">Filed by: <em><strong>{{ filer.username }}</strong></em></p>
+            {% else %}
+              <p class="card-text small grey">Filed by: <em><strong>unknown</strong></em></p>
+            {% endif %}
+            <p class="card-text bold mb-2 mt-4">WHEN</p>
             <p class="card-text mb-2">{{ sighting.datetime }}</p>
-            <p class="card-text mb-4"><em>Duration: </em>{{ sighting.duration }}</p>
+            <p class="card-text mb-4">Duration: <em>{{ sighting.duration }}</em></p>
             <p class="card-text bold mb-2">WHERE</p>
             <p class="card-text mb-2">{{ sighting.city }}, {{ sighting.state }}</p>
             <p class="card-text mb-4">{{ sighting.latitude }}° | {{ sighting.longitude }}°</p>
@@ -21,12 +26,15 @@
               {{ detail_map|safe }}
             </div>
             <p class="card-text bold mb-2 mt-4">WHAT</p>
-            <p class="card-text mb-2"><em>Shape:</em> {{ sighting.get_shape_display.capitalize }}</p>
-            <p class="card-text">{{ sighting.description }}</p>
+            <p class="card-text mb-2">Shape: <em>{{ sighting.get_shape_display.capitalize }}</em></p>
+            <p class="card-text mb-1 ">Description: </p>
+            <p class="card-text"><em>"{{ sighting.description }}"</em></p>
           </div>
         </div>
       </div>
+      
       <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+        
         <div class="card mb-3">
           <div class="card-body">
             {% for photo in sighting.photo_set.all %}
@@ -36,23 +44,27 @@
             {% endfor %}
           </div>
         </div>
-        <div class="card">
-          <div class="card-body">
-            <form action="{% url 'add_photo' sighting.id %}" enctype="multipart/form-data" method="POST" class="">
-              {% csrf_token %}
-              <input type="file" name="photo-file">
-              <br><br>
-              <button type="submit" class="btn">Upload Photo</button>
-          </form>
+
+        {% if user.id == filer.id %}
+          <div class="card">
+            <div class="card-body">
+              <form action="{% url 'add_photo' sighting.id %}" enctype="multipart/form-data" method="POST" class="">
+                {% csrf_token %}
+                <input type="file" name="photo-file">
+                <br><br>
+                <button type="submit" class="btn">Upload Photo</button>
+            </form>
+            </div>
           </div>
-        </div>
+        {% endif %}
+
       </div>
+
     </div>
     <div class="col-12 mb-4">
       <h2 class="card-title mb-3">Comments</h2>
 
-     <div id="comment-error" class="alert alert-danger" style="display: none;"></div> <!-- This is the error message that will display if the user tries to submit an empty comment. -->
-      <form id="comment-form" action="{% url 'add_comment' sighting.id %}" method="POST">
+     <div id="comment-error" class="alert alert-danger" style="display: none;"></div>
           {% csrf_token %}
         <div class="form-group">
           {{ comment_form|crispy }}
