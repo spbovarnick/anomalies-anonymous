@@ -14,17 +14,6 @@
             </span>
         </form>
       </div>
-      <div class="col-md-6 col-lg-4 mb-6">
-        <form action="{% url 'index' %}" method="GET" class="input-group rounded mb-3" style="max-width: 375px;">
-            <select class="form-control rounded" aria-label="" aria-describedby="-addon" name="sort">
-              <option value="most-recent">Most Recent First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="newest-posted">Newest Reports</option>
-              <option value="oldest-posted">Oldest Reports</option>
-            </select>
-            <button class="btn" type="submit">Sort</button>
-        </form>
-      </div>
     </div>
     <div class="row" id="sightings-row">
       {% for sighting in sightings %}
