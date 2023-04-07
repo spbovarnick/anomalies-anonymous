@@ -26,5 +26,5 @@ class SightingForm(ModelForm):
         fields = ['datetime', 'city', 'state', 'shape', 'duration', 'description']
         widgets = {
             'datetime': DateTimePickerInput(),
-            'duration': TextInput(attrs={'placeholder': 'DD HH:MM:SS'})
+            'duration': TextInput(attrs={'placeholder': 'HH:MM:SS'})
         }
