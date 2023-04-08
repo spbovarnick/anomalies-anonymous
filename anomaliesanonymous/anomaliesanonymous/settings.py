@@ -88,9 +88,9 @@ WSGI_APPLICATION = 'anomaliesanonymous.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gabewolford/anomaliesanonymous',
+        'NAME': 'gabewolford/anomalies-anonymous',
         'USER': 'gabewolford',
-        'PASSWORD': 'v2_42rHS_RqsTKXGPn9kVeRsPEr3Jm3C',
+        'PASSWORD': os.environ['SECRET_KEY'],
         'HOST': 'db.bit.io',
         'PORT': '5432',
     }
