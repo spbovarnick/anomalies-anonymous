@@ -92,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gabewolford/anomaliesanonymous',
         'USER': 'gabewolford',
-        'PASSWORD': 'v2_42rHS_RqsTKXGPn9kVeRsPEr3Jm3C',
+        'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': 'db.bit.io',
         'PORT': '5432',
     }
