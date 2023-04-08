@@ -12,7 +12,7 @@ from main_app.models import Sighting
 
 # SightingModel = apps.get_model('main_app', 'Sighting')
 
-SERVICE_ACCOUNT_FILE = 'google-keys.json'
+SERVICE_ACCOUNT_FILE = 'google-api.json'
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
