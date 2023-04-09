@@ -234,6 +234,10 @@ div.form-text {
         border-radius: 10px;
         backdrop-filter: blur(10px);
     }
+
+    #anonanon {
+        display: block !important;
+    }
     
     a.nav-link.navbar-brand {
         display: none;
