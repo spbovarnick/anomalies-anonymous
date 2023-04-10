@@ -55,6 +55,7 @@ The original list of sightings we were able to find included columns for both la
 # Getting Started
 
 [Click to View Project Planning](https://trello.com/b/tnR021Si/project-3)<br>
+[Link To Deployed App](https://anomalies-anonymous.herokuapp.com/)
 
 # Next Steps
 
