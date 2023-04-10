@@ -109,8 +109,7 @@ class Sighting(models.Model):
 
         if self.longitude == None:
             self.place = f'{self.city}, {self.state}, United States'
-            self.longitude = geocoder.osm(self.place).lng
-            
+            self.longitude = geocoder.osm(self.place).lng            
         return super().save(*args, **kwargs)
 
     def __str__(self):
