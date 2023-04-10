@@ -85,6 +85,9 @@ def sightings_create(request):
     if form.is_valid():
         sighting = form.save(commit=False)
         sighting.user = request.user
+        place = f"{sighting.city}, {sighting.state}, United States"
+        sighting.latitude = geocoder.osm(place).lat
+        sighting.longitude = geocoder.osm(place).lng
         sighting.save()
         return redirect('detail', sighting_id=sighting.id)
     context['form'] = form
@@ -96,6 +99,9 @@ def sightings_update(request, sighting_id):
     sighting = get_object_or_404(Sighting, id=sighting_id)
     form = SightingForm(request.POST or None, instance=sighting)
     if form.is_valid():
+        place = f"{sighting.city}, {sighting.state}, United States"
+        sighting.latitude = geocoder.osm(place).lat
+        sighting.longitude = geocoder.osm(place).lng
         sighting = form.save()
         return render(request, 'sightings/detail.html', {
         'sighting': sighting
