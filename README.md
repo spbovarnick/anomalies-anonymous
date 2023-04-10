@@ -6,7 +6,8 @@ Our project builds upon a database of nearly 65,000 sightings from around the Un
 
 # Screenshot
 
-![Landing Page](anomaliesanonymous/main_app/static/assets/landing-page-grab.png)
+![Landing Page](https://user-images.githubusercontent.com/98293872/230804913-a1758efd-40f2-45b4-9623-1666b9ebd7d8.png)
+
 
 # Technologies Used
 
