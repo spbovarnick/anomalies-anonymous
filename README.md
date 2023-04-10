@@ -58,5 +58,10 @@ The original list of sightings we were able to find included columns for both la
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+- Upvoting/downvoting capabilites for a ranking system of popular sightings 
+- Use some sort of news API to have a page for articles linking to sightings in the news
+- Add photo upload to Report A Sighting form
+- Build out the user model to include more information (first/last name, photo, occupation, watched sightings, etc)
+- Be able to delete individuals photos on your sighting without needing to delete the report and file a new one with correct picture
+- Carousel for sightings with multiple photos
+- Built out comment model to be able to reply to certain comments, upload photos to comments, tag other users, etc.
