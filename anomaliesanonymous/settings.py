@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'anomaliesanonymous.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'spbovarnick/aa-seed',
+        'NAME': 'neondb',
         'USER': 'spbovarnick',
         'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': 'db.bit.io',
+        'HOST': 'ep-hidden-resonance-78142231.us-west-2.aws.neon.tech',
         'PORT': '5432',
     }
 }
